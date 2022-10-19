@@ -1,30 +1,34 @@
 import React from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector,useDispatch } from "react-redux"
 
 // importing MUI components
-import { Container, Typography, Grid, CardActionArea, CardActions, Button, Card,CardContent ,CardMedia} from "@mui/material";
+import { Container, Typography, Grid, CardActionArea, CardActions, Button } from "@mui/material";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 
 // importing action
-import {addHandler, filterList, descriptionHandler} from '../redux/action'
+import {addHandler, filterList} from '../redux/action'
+
+export default function JacketsContent() {
+    const data = useSelector(state => state.Data)
+    const val = data.filter(data => {
+        return data.category.indexOf("men's clothing") !== -1;
+    })
 
 
-function LastestCollection() {
-  const data = useSelector(state => state.Data)
   const dispatch = useDispatch()
 
   const filterListHandler = (id) => {
-    if(id == id){
       dispatch(filterList(id));
-    }
   }; 
-
   return (
     <Container maxWidth='xl' sx={{ py: 4 }}>
       <Typography variant='h3' textAlign={'center'}>
         Latest Collection
       </Typography>
       <Grid container>
-        {data.map((val) => {
+        {val.map((val) => {
           return (
             <Grid xs={12} md={4} xl={3} sx = {{my: 2}} item key={val.id}>
               <Card sx={{ maxWidth: 345 }}>
@@ -59,5 +63,3 @@ function LastestCollection() {
     </Container>
   )
 }
-
-export default LastestCollection

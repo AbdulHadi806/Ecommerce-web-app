@@ -1,11 +1,8 @@
-import {createStore, combineReducers } from "redux"
-import mainReducer, {CountReducer} from "./reducer.js"
+import {createStore } from "redux"
+import Reducer from "./reducer.js"
 
-const allReducers = combineReducers({
-    mainReducer,
-    CountReducer,
-  });
 
-const store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+const store = createStore(Reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 export default store

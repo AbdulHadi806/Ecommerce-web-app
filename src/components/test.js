@@ -1,32 +1,32 @@
 import React from 'react'
 import { useSelector, useDispatch } from "react-redux"
 
-// importing MUI components
-import { Container, Typography, Grid, CardActionArea, CardActions, Button, Card,CardContent ,CardMedia} from "@mui/material";
-
-// importing action
-import {addHandler, filterList, descriptionHandler} from '../redux/action'
+// importing MUI compoenents here
+import { Container, Typography, Grid, CardActionArea, CardActions, Button, Card, CardContent, CardMedia } from "@mui/material";
 
 
-function LastestCollection() {
-  const data = useSelector(state => state.Data)
+// importing actions here
+import { removeItem, removeCountHandler } from '../redux/action'
+
+
+export default function Test() {
+  const filterListItems = useSelector(state => state.FilterList)
   const dispatch = useDispatch()
+  const itemDeleteHandler = (id) => {
+    dispatch(removeItem(id))
+  }
 
-  const filterListHandler = (id) => {
-    if(id == id){
-      dispatch(filterList(id));
-    }
-  }; 
+  console.log(filterListItems)
 
   return (
     <Container maxWidth='xl' sx={{ py: 4 }}>
-      <Typography variant='h3' textAlign={'center'}>
-        Latest Collection
+      <Typography>
       </Typography>
       <Grid container>
-        {data.map((val) => {
+        {filterListItems.map((val) => {
+          
           return (
-            <Grid xs={12} md={4} xl={3} sx = {{my: 2}} item key={val.id}>
+            <Grid xs={12} md={4} xl={3} sx={{ my: 2 }} item key={val.id}>
               <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea>
                   <CardMedia
@@ -43,12 +43,8 @@ function LastestCollection() {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button onClick={(e)=> {
-                    e.preventDefault();
-                    dispatch(addHandler());
-                    filterListHandler(val.id)
-                    }} size="small" color="primary">
-                    Add to Cart
+                  <Button onClick={(e) => {e.preventDefault();itemDeleteHandler(val.id); dispatch(removeCountHandler())}} size="small" color="primary">
+                    Delete From Cart
                   </Button>
                 </CardActions>
               </Card>
@@ -59,5 +55,3 @@ function LastestCollection() {
     </Container>
   )
 }
-
-export default LastestCollection

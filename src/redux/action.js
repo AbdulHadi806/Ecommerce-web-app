@@ -1,7 +1,6 @@
 
 
 export const apiFetcherDispatch = (data) => {
-
     return {
         type: 'get-Data',
         payload: data
@@ -11,5 +10,31 @@ export const apiFetcherDispatch = (data) => {
 export const addHandler = () => {
     return {
         type: 'CountAdd'
+    }
+}
+
+export const removeCountHandler = () => {
+    return {
+        type: "COUNTREMOVE"
+    }
+}
+export const filterList = (id) => {
+    return {
+        type: 'FilterList',
+        payload: id
+    }
+}
+
+export const removeItem = (id) => {
+    return {
+        type: 'REMOVEITEM',
+        payload: id
+    }
+}
+
+export const descriptionHandler = (data) => {
+    return {
+        type: 'SHOWDESCRIPTION',
+        payload: data
     }
 }

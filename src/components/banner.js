@@ -1,14 +1,15 @@
-import {  Grid, Paper,Container, Card } from "@mui/material";
-import { sizing } from '@mui/system';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles({
+  imageStyle: {
+    width: "100%"
+  },
+});
 
 export default function Banner() {
+  const classes = useStyles();
+
   return (
-    <Grid container>
-      <Grid item xl = {12}>
-        <Card sx={{ width: '100%' }}>
-        <img  sx={{ width: '100%' }} src='images/banner-image.png' ></img>
-        </Card>
-      </Grid>
-    </Grid>
+        <img className={classes.imageStyle} src='images/banner-image.png' ></img>
   )
 }

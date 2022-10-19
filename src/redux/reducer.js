@@ -1,34 +1,36 @@
-// Api data main reducer content is here
-
-const initialStateMain = {
-    Cases: [],
+const initialState = {
+  Data: [],
+  count: 0,
+  FilterList: []
 };
 
 
-export default function mainReducer(state = initialStateMain, action) {
+export default function Reducer(state = initialState, action) {
   switch (action.type) {
     case "get-Data":
       return {
         ...state,
-        Cases: action.payload
+        Data: action.payload
+      }
+    case "FilterList":
+      return ({
+        ...state, FilterList: [...state.FilterList, ...state.Data.filter(obj => obj.id == action.payload)]
+      })
+    case "REMOVEITEM":
+      return ({ ...state, FilterList: state.FilterList.filter((obj) => obj.id !== action.payload)})
+    case "CountAdd":
+      return {
+        ...state,
+        count: state.count + 1
+      }
+    case "COUNTREMOVE":
+      if(state.count > 0){
+        return {
+          ...state,
+          count: state.count - 1
+        }
       }
     default:
       return state;
   }
 };
-
-// counter reducer content is here
-
-const initialCountState = {
-    count: 0
-}
-
-
-export function CountReducer(state = initialCountState.count, action) {
-    switch (action.type) {
-        case "CountAdd":
-            return  state + 1;
-        default:
-          return state;
-      }
-}
