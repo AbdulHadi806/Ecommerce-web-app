@@ -20,7 +20,7 @@ import {
 // importing actions here
 import { removeItem, removeCountHandler } from "../redux/action";
 
-export default function Test() {
+export default function Cart() {
   const filterListItems = useSelector((state) => state.FilterList);
   const dispatch = useDispatch();
   const itemDeleteHandler = (id) => {

@@ -1,12 +1,12 @@
 import React from 'react'
 
 // importing components
-import Test from '../components/test'
+import Cart from '../components/Cart'
 
 export default function Cartpage() {
   return (
     <>
-    <Test />
+    <Cart />
     </>
   )
 }
