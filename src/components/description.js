@@ -5,7 +5,7 @@ import { useSelector,useDispatch} from "react-redux"
 import { Container, Typography, Grid, CardActionArea, CardActions, Button, Card,CardContent ,CardMedia} from "@mui/material";
 
 
-import {addHandler, filterList, descriptionHandler} from '../redux/action'
+import {addHandler, filterList} from '../redux/action'
 
 
 export default function Description() {

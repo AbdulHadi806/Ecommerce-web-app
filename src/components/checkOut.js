@@ -1,15 +1,42 @@
-import React from 'react'
+import React, {useState} from 'react'
 
+// importing mui components
 import { Container, Typography, Button, CardActions, Card, CardContent,Grid,TextField, Input } from "@mui/material";
 
-import { useSelector } from "react-redux"
+// importing redux 
+import { useSelector, useDispatch } from "react-redux"
 
+// importing actions
+import {userLoginHandler} from '../redux/action'
 
 
 export default function CheckOut() {
+  const [userLoginName, setUserLoginName] = useState("")
+  const [userLoginLastName, setUserLoginLastName] = useState("")
+  const [userLoginEmail, setUserLoginEmail] = useState("")
+  const [userLoginNumber, setUserLoginNumber] = useState("")
+  const [userLoginAddress, setUserLoginAddress] = useState("")
+
     const data = useSelector(state => state.FilterList)
     const totalPriceCounter = data.reduce((aucc, curr) => aucc + curr.price, 0)
     const totalPrice = totalPriceCounter.toFixed(2)
+
+    const dispatch = useDispatch()
+
+    const LoginHandler = (e) => {
+      e.preventDefault()
+      if(userLoginName && userLoginLastName && userLoginEmail && userLoginNumber && userLoginAddress){
+        dispatch(userLoginHandler({FirstName: userLoginName, LastName: userLoginLastName, Email: userLoginEmail, Number: userLoginNumber, address: userLoginAddress, id: Math.random()}))
+        setUserLoginName('')
+      setUserLoginLastName('')
+      setUserLoginEmail('')
+      setUserLoginNumber('')
+      setUserLoginAddress('')
+      }
+      else {
+        alert("Please enter all values")
+      }
+    }
 
   return (
     <>
@@ -24,25 +51,25 @@ export default function CheckOut() {
             <Typography variant="body2" color="textSecondary" component="p" gutterBottom>
               Fill up the form and our team will get back to you within 24 hours.
           </Typography> 
-            <form>
+            <form onSubmit={LoginHandler}>
               <Grid container spacing={1}>
                 <Grid xs={12} sm={6} item>
-                  <TextField placeholder="Enter first name" label="First Name" variant="outlined" fullWidth required />
+                  <TextField value={userLoginName} onChange={(e) => setUserLoginName(e.target.value)} placeholder="Enter first name"  variant="outlined" fullWidth required />
                 </Grid>
                 <Grid xs={12} sm={6} item>
-                  <TextField placeholder="Enter last name" label="Last Name" variant="outlined" fullWidth required />
+                  <TextField value={userLoginLastName} onChange={(e) => setUserLoginLastName(e.target.value)} placeholder="Enter last name"  variant="outlined" fullWidth required />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField type="email" placeholder="Enter email" label="Email" variant="outlined" fullWidth required />
+                  <TextField value={userLoginEmail} onChange={(e) => setUserLoginEmail(e.target.value)}  type="email" placeholder="Enter email" variant="outlined" fullWidth required />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField type="number" placeholder="Enter phone number" label="Phone" variant="outlined" fullWidth required />
+                  <TextField value={userLoginNumber} onChange={(e) => setUserLoginNumber(e.target.value)} type="number" placeholder="Enter phone number"  variant="outlined" fullWidth required />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField label="address" multiline placeholder="Type your address here" variant="outlined" fullWidth required />
+                  <TextField value={userLoginAddress} onChange={(e) => setUserLoginAddress(e.target.value)}  multiline placeholder="Type your address here" variant="outlined" fullWidth required />
                 </Grid>
                 <Grid item xs={12}>
-                  <Button type="submit" variant="contained" color="primary" fullWidth>Submit</Button>
+                  <Button  type='submit' variant="contained" color="primary" fullWidth>Submit</Button>
                 </Grid>
 
               </Grid>
@@ -64,7 +91,7 @@ export default function CheckOut() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button  size="small">Confirm Payment</Button>
+        {/* <Button  size="small">Confirm Payment</Button> */}
       </CardActions>
     </Card>
         </Grid>

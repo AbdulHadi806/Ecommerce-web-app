@@ -2,14 +2,14 @@
 
 export const apiFetcherDispatch = (data) => {
     return {
-        type: 'get-Data',
+        type: 'GETDATA',
         payload: data
     }
     
 }
 export const addHandler = () => {
     return {
-        type: 'CountAdd'
+        type: 'COUNTADD'
     }
 }
 
@@ -20,7 +20,7 @@ export const removeCountHandler = () => {
 }
 export const filterList = (id) => {
     return {
-        type: 'FilterList',
+        type: 'FILTERLIST',
         payload: id
     }
 }
@@ -36,5 +36,12 @@ export const descriptionHandler = (id) => {
     return {
         type: 'SHOWDESCRIPTION',
         payload: id
+    }
+}
+
+export const userLoginHandler = (data) => {
+    return {
+        type: 'USERLOGIN',
+        payload: data
     }
 }
