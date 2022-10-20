@@ -5,20 +5,17 @@ import { useSelector,useDispatch} from "react-redux"
 import { Container, Typography, Grid, CardActionArea, CardActions, Button, Card,CardContent ,CardMedia} from "@mui/material";
 
 // importing actions here
-import {filterList} from '../redux/action'
+import {filterList, countAdd} from '../redux/action'
 
 
 export default function Description() {
     const itemsDescription = useSelector(state => state.ProductDetails)
+    const Count = useSelector(state => state.Count)
+
     const dispatch = useDispatch()
 
-    const filterListHandler = (id) => {
-        dispatch(filterList(id));
-    }; 
-
     const handleAddCart = (e)=> {
-      e.preventDefault();
-      filterListHandler(itemsDescription.id)
+      dispatch(filterList(e));
       }
   return (
         <Container maxWidth='xl' sx={{ py: 4 }}>
@@ -49,7 +46,7 @@ export default function Description() {
                     </CardContent>
                   </CardActionArea>
                   <CardActions sx = {{justifyContent:"flex-end"}}>
-                    <Button onClick={handleAddCart}  size="small" color="primary">
+                    <Button onClick={(e)=> {dispatch(countAdd());handleAddCart(data.id)}}  size="small" color="primary">
                       Add to Cart
                     </Button>
                   </CardActions>

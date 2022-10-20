@@ -6,6 +6,12 @@ export const apiFetcherDispatch = (data) => {
     
 }
 
+export const countAdd = () => {
+    return {
+        type: 'COUNTADD'
+    }
+}
+
 export const filterList = (id) => {
     return {
         type: 'CARTITEMS',
@@ -13,6 +19,11 @@ export const filterList = (id) => {
     }
 }
 
+export const countRemove = () => {
+    return {
+        type: 'COUNTREMOVE'
+    }
+}
 export const removeItem = (id) => {
     return {
         type: 'REMOVEITEM',

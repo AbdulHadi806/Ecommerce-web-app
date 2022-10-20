@@ -19,22 +19,30 @@ export default function Reducer(state = initialState, action) {
         CartItems: [
           ...state.CartItems,
           ...state.ShopItems.filter((obj) => obj.id == action.payload)
-        ],count: state.count+1
+        ]
       };
+    case "COUNTADD":
+        return {
+          ...state, 
+          count: state.count + 1
+        }
+      case "COUNTREMOVE":
+        if(state.count >= 0){
+          return {
+            ...state, 
+            count: state.count - 1
+          }
+        }
     case "REMOVEITEM":
-      if (state.count > 0) {
       return ({
         ...state,
         CartItems: state.CartItems.filter((obj) => obj.id !== action.payload),
-          count: state.count - 1,
       })
-    }
     case "PRODUCTDETAILS":
       return {
         ...state,
-        ProductDetails: [
-          ...state.ShopItems.filter((obj) => obj.id == action.payload),
-        ],
+        ProductDetails: 
+          state.ShopItems.filter((obj) => obj.id == action.payload),
       };
     case "USERLOGIN":
       return {

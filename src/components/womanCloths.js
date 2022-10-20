@@ -10,7 +10,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 
 // importing action
-import {filterList, descriptionHandler} from '../redux/action'
+import {filterList, descriptionHandler, countAdd} from '../redux/action'
 
 export default function WomanCloths() {
     const data = useSelector(state => state.ShopItems)
@@ -53,6 +53,7 @@ export default function WomanCloths() {
                 <CardActions>
                   <Button onClick={(e)=> {
                     e.preventDefault();
+                    dispatch(countAdd())
                     filterListHandler(val.id)
                     }} size="small" color="primary">
                     Add to Cart

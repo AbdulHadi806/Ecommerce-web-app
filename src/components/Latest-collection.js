@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { Container, Typography, Grid, CardActionArea, CardActions, Button, Card,CardContent ,CardMedia} from "@mui/material";
 
 // importing action
-import { filterList, descriptionHandler} from '../redux/action'
+import { filterList, descriptionHandler, countAdd} from '../redux/action'
 
 
 function LastestCollection() {
@@ -16,7 +16,7 @@ function LastestCollection() {
   
   const dispatch = useDispatch()
 
-  const filterListHandler = (id) => {
+  const cartListHandler = (id) => {
       dispatch(filterList(id));
   };
 
@@ -49,7 +49,8 @@ function LastestCollection() {
                 <CardActions>
                   <Button onClick={(e)=> {
                     e.preventDefault();
-                    filterListHandler(val.id)
+                    dispatch(countAdd())
+                    cartListHandler(val.id)
                     }} size="small" color="primary">
                     Add to Cart
                   </Button>

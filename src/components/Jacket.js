@@ -11,7 +11,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 
 // importing action
-import {filterList, descriptionHandler} from '../redux/action'
+import {filterList, descriptionHandler, countAdd} from '../redux/action'
 
 export default function JacketsContent() {
     const data = useSelector(state => state.ShopItems)
@@ -22,7 +22,7 @@ export default function JacketsContent() {
 
   const dispatch = useDispatch()
 
-  const filterListHandler = (id) => {
+  const cartListHandler = (id) => {
       dispatch(filterList(id));
   }; 
   return (
@@ -54,7 +54,8 @@ export default function JacketsContent() {
                 <CardActions>
                   <Button onClick={(e)=> {
                     e.preventDefault();
-                    filterListHandler(val.id)
+                    dispatch(countAdd())
+                    cartListHandler(val.id)
                     }} size="small" color="primary">
                     Add to Cart
                   </Button>

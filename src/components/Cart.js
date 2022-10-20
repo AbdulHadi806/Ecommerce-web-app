@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 
 // importing actions here
-import { removeItem } from "../redux/action";
+import { removeItem, countRemove } from "../redux/action";
 
 export default function Cart() {
   const CartItems = useSelector((state) => state.CartItems);
@@ -70,6 +70,7 @@ export default function Cart() {
                     onClick={(e) => {
                       e.preventDefault();
                       itemDeleteHandler(data.id)
+                      dispatch(countRemove());
                     }}
                     size="small"
                     color="primary"
