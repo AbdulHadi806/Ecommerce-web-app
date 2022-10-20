@@ -14,6 +14,9 @@ import Mainpage from "./navigationComponents/main.js";
 import Jackets from "./navigationComponents/Jackets.js"
 import ElectronicPage from "./navigationComponents/electronicPage"
 import WomanClothsPage from "./navigationComponents/womanClothPage"
+import CheckoutPage from "./navigationComponents/checkoutPage"
+import DescriptionPage from "./navigationComponents/descriptionPage"
+
 
 // importing components
 import Header from "./components/header.js";  
@@ -68,6 +71,8 @@ function App() {
           <Route path="/Jackets" element={<Jackets />}></Route>
           <Route path="/Electronics" element={<ElectronicPage />}></Route>
           <Route path="/WomanClothsPage" element={<WomanClothsPage />}></Route>
+          <Route path="/checkoutPage" element={<CheckoutPage />}></Route>
+          <Route path="/description" element={<DescriptionPage />}></Route>
 
         </Routes>
       </div>

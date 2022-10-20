@@ -25,10 +25,10 @@ const Header = () => {
 
             <Grid item xs = {4} lg = {4} sx = {{display: 'flex',flexWrap: "wrap",alignItems: "center", justifyContent:'center'}}>
 
-                    <Button><Link to = "/"> <Typography  variant="h6" href ='#'  sx = {{textDecoration: 'none', color: 'color.primary.dark', pr:1}} >Home </Typography></Link></Button>
-                    <Button><Link to = "/Jackets" > <Typography  variant="h6" href ='#'  sx = {{textDecoration: 'none', color: 'color.primary.dark', pr:1}} >Men clothing</Typography></Link></Button>
-                    <Button><Link to = "/WomanClothsPage"  > <Typography  variant="h6" href ='#'  sx = {{textDecoration: 'none', color: 'color.primary.dark', pr:1}} >Female</Typography></Link></Button>
-                    <Button><Link to = "/Electronics" > <Typography  variant="h6" href ='#'  sx = {{textDecoration: 'none', color: 'color.primary.dark', pr:1}} >Electronics</Typography></Link></Button>            
+                    <Button><Link to = "/" style={{textDecoration: "none"}}> <Typography  variant="h6" href ='#'  sx = {{textDecoration: 'none', color: 'color.primary.dark', pr:1}} >Home </Typography></Link></Button>
+                    <Button><Link to = "/Jackets" style={{textDecoration: "none"}}> <Typography  variant="h6" href ='#'  sx = {{textDecoration: 'none', color: 'color.primary.dark', pr:1}} >Men clothing</Typography></Link></Button>
+                    <Button><Link to = "/WomanClothsPage" style={{textDecoration: "none"}} > <Typography  variant="h6" href ='#'  sx = {{textDecoration: 'none', color: 'color.primary.dark', pr:1}} >Female</Typography></Link></Button>
+                    <Button><Link to = "/Electronics" style={{textDecoration: "none"}}> <Typography  variant="h6" href ='#'  sx = {{textDecoration: 'none', color: 'color.primary.dark', pr:1}} >Electronics</Typography></Link></Button>            
             </Grid>
             <Grid item xs = {3} lg = {4} sx = {{display: 'flex',flexWrap: "wrap",alignItems: "center", justifyContent:'flex-end'}}>
                 <Button><Link to = '/Cart' ><ShoppingCartIcon fontSize = 'large' /><Typography variant='h5' sx = {{position: 'absolute', right: -10, top: 7}}>{Count}</Typography></Link></Button>

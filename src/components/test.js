@@ -1,57 +1,86 @@
-import React from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+// importing react router dom Link
+import { Link } from "react-router-dom";
 
 // importing MUI compoenents here
-import { Container, Typography, Grid, CardActionArea, CardActions, Button, Card, CardContent, CardMedia } from "@mui/material";
-
+import {
+  Container,
+  Typography,
+  Grid,
+  CardActionArea,
+  CardActions,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+} from "@mui/material";
 
 // importing actions here
-import { removeItem, removeCountHandler } from '../redux/action'
-
+import { removeItem, removeCountHandler } from "../redux/action";
 
 export default function Test() {
-  const filterListItems = useSelector(state => state.FilterList)
-  const dispatch = useDispatch()
+  const filterListItems = useSelector((state) => state.FilterList);
+  const dispatch = useDispatch();
   const itemDeleteHandler = (id) => {
-    dispatch(removeItem(id))
-  }
-
-  console.log(filterListItems)
+    dispatch(removeItem(id));
+  };
 
   return (
-    <Container maxWidth='xl' sx={{ py: 4 }}>
-      <Typography>
+    <Container maxWidth="xl" sx={{ py: 4 }}>
+      <Typography variant='h3' textAlign={'center'}>
+      Your Current Cart
       </Typography>
-      <Grid container>
-        {filterListItems.map((val) => {
-          
-          return (
-            <Grid xs={12} md={4} xl={3} sx={{ my: 2 }} item key={val.id}>
-              <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea>
+      {filterListItems.map((data) => {
+        return (
+          <Grid key = {data.id} container sx={{ justifyContent: 'center' }}>
+            <Grid xs={8} sx={{ my: 2 }} item>
+              <Card>
+                <CardActionArea sx={{ display: "flex", width: "100%" }}>
                   <CardMedia
                     component="img"
                     height="280"
-                    image={val.image}
-                    alt={val.title}
+                    image={data.image}
+                    alt="hello"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                      {val.title}
+                      {data.title}
                     </Typography>
-                    <Typography>{val.price} USD</Typography>
+                    <Typography gutterBottom component="div">
+                      {data.description}
+                    </Typography>
+                    <Typography sx={{ pt: 3 }}>
+                      Rating: {data.rating.rate} stars
+                    </Typography>
+                    <Typography>Price: {data.price} USD</Typography>
                   </CardContent>
                 </CardActionArea>
-                <CardActions>
-                  <Button onClick={(e) => {e.preventDefault();itemDeleteHandler(val.id); dispatch(removeCountHandler())}} size="small" color="primary">
-                    Delete From Cart
+                <CardActions sx={{ justifyContent: "flex-end" }}>
+                  <Button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      itemDeleteHandler(data.id);
+                      dispatch(removeCountHandler());
+                    }}
+                    size="small"
+                    color="primary"
+                  >
+                    Remove From Cart
                   </Button>
+                  <Link
+                    to="/checkoutPage"
+                    style={{ color: "#000", textDecoration: "none" }}
+                  >
+                    <Button>Go to Checkout</Button>
+                  </Link>
                 </CardActions>
               </Card>
             </Grid>
-          )
-        })}
-      </Grid>
+          </Grid>
+        );
+      })}
     </Container>
-  )
+  );
 }

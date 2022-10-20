@@ -1,7 +1,8 @@
 const initialState = {
   Data: [],
   count: 0,
-  FilterList: []
+  FilterList: [],
+  MoreDescriptionList: []
 };
 
 
@@ -14,7 +15,7 @@ export default function Reducer(state = initialState, action) {
       }
     case "FilterList":
       return ({
-        ...state, FilterList: [...state.FilterList, ...state.Data.filter(obj => obj.id == action.payload)]
+            ...state, FilterList: [...state.FilterList, ...state.Data.filter(obj => obj.id == action.payload)]
       })
     case "REMOVEITEM":
       return ({ ...state, FilterList: state.FilterList.filter((obj) => obj.id !== action.payload)})
@@ -30,6 +31,10 @@ export default function Reducer(state = initialState, action) {
           count: state.count - 1
         }
       }
+    case "SHOWDESCRIPTION":
+      return ({
+        ...state, MoreDescriptionList: [...state.Data.filter(obj => obj.id == action.payload)]
+      })
     default:
       return state;
   }

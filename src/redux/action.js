@@ -32,9 +32,9 @@ export const removeItem = (id) => {
     }
 }
 
-export const descriptionHandler = (data) => {
+export const descriptionHandler = (id) => {
     return {
         type: 'SHOWDESCRIPTION',
-        payload: data
+        payload: id
     }
 }

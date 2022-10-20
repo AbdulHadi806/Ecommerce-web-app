@@ -1,6 +1,9 @@
 import React from 'react'
 import { useSelector, useDispatch } from "react-redux"
 
+// importing react routing dom components
+import { Link } from "react-router-dom";
+
 // importing MUI components
 import { Container, Typography, Grid, CardActionArea, CardActions, Button, Card,CardContent ,CardMedia} from "@mui/material";
 
@@ -10,13 +13,12 @@ import {addHandler, filterList, descriptionHandler} from '../redux/action'
 
 function LastestCollection() {
   const data = useSelector(state => state.Data)
+  
   const dispatch = useDispatch()
 
   const filterListHandler = (id) => {
-    if(id == id){
       dispatch(filterList(id));
-    }
-  }; 
+  };
 
   return (
     <Container maxWidth='xl' sx={{ py: 4 }}>
@@ -28,6 +30,7 @@ function LastestCollection() {
           return (
             <Grid xs={12} md={4} xl={3} sx = {{my: 2}} item key={val.id}>
               <Card sx={{ maxWidth: 345 }}>
+                <Link to="/description" onClick={(e)=> {dispatch(descriptionHandler(val.id))}} style={{color: '#000', textDecoration: "none"}}>
                 <CardActionArea>
                   <CardMedia
                     component="img"
@@ -42,6 +45,7 @@ function LastestCollection() {
                     <Typography>{val.price} USD</Typography>
                   </CardContent>
                 </CardActionArea>
+                </Link>
                 <CardActions>
                   <Button onClick={(e)=> {
                     e.preventDefault();
