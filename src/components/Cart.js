@@ -1,4 +1,6 @@
 import React from "react";
+
+
 import { useSelector, useDispatch } from "react-redux";
 
 // importing react router dom Link
@@ -18,23 +20,29 @@ import {
 } from "@mui/material";
 
 // importing actions here
-import { removeItem, removeCountHandler } from "../redux/action";
+import { removeItem } from "../redux/action";
 
 export default function Cart() {
-  const filterListItems = useSelector((state) => state.FilterList);
+  const CartItems = useSelector((state) => state.CartItems);
+  
+  const newCartItems = [...new Set(CartItems)];
+
+
+
   const dispatch = useDispatch();
   const itemDeleteHandler = (id) => {
     dispatch(removeItem(id));
   };
-
+  
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
       <Typography variant='h3' textAlign={'center'}>
       Your Current Cart
       </Typography>
-      {filterListItems.map((data) => {
+      {newCartItems.map((data) => {
         return (
           <Grid key = {data.id} container sx={{ justifyContent: 'center' }}>
+
             <Grid xs={8} sx={{ my: 2 }} item>
               <Card>
                 <CardActionArea sx={{ display: "flex", width: "100%" }}>
@@ -61,8 +69,7 @@ export default function Cart() {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      itemDeleteHandler(data.id);
-                      dispatch(removeCountHandler());
+                      itemDeleteHandler(data.id)
                     }}
                     size="small"
                     color="primary"

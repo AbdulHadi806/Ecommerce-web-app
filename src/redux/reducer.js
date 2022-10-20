@@ -1,8 +1,8 @@
 const initialState = {
-  Data: [],
+  ShopItems: [],
   count: 0,
-  FilterList: [],
-  MoreDescriptionList: [],
+  CartItems: [],
+  ProductDetails: [],
   UserLogin: [],
 };
 
@@ -11,38 +11,29 @@ export default function Reducer(state = initialState, action) {
     case "GETDATA":
       return {
         ...state,
-        Data: action.payload,
+        ShopItems: action.payload,
       };
-    case "FILTERLIST":
+    case "CARTITEMS":
       return {
         ...state,
-        FilterList: [
-          ...state.FilterList,
-          ...state.Data.filter((obj) => obj.id == action.payload),
-        ],
+        CartItems: [
+          ...state.CartItems,
+          ...state.ShopItems.filter((obj) => obj.id == action.payload)
+        ],count: state.count+1
       };
     case "REMOVEITEM":
+      if (state.count > 0) {
       return ({
         ...state,
-          FilterList: state.FilterList.filter((obj) => obj.id !== action.payload),
-      })
-    case "COUNTADD":
-      return {
-        ...state,
-        count: state.count + 1,
-      };
-    case "COUNTREMOVE":
-      if (state.count > 0) {
-        return {
-          ...state,
+        CartItems: state.CartItems.filter((obj) => obj.id !== action.payload),
           count: state.count - 1,
-        };
-      }
-    case "SHOWDESCRIPTION":
+      })
+    }
+    case "PRODUCTDETAILS":
       return {
         ...state,
-        MoreDescriptionList: [
-          ...state.Data.filter((obj) => obj.id == action.payload),
+        ProductDetails: [
+          ...state.ShopItems.filter((obj) => obj.id == action.payload),
         ],
       };
     case "USERLOGIN":

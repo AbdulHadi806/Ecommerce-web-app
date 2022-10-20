@@ -11,14 +11,14 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 
 // importing action
-import {addHandler, filterList, descriptionHandler} from '../redux/action'
+import {filterList, descriptionHandler} from '../redux/action'
 
 export default function JacketsContent() {
-    const data = useSelector(state => state.Data)
-    const val = data.filter(data => {
+    const data = useSelector(state => state.ShopItems)
+
+    const items = data.filter(data => {
         return data.category.indexOf("men's clothing") !== -1;
     })
-
 
   const dispatch = useDispatch()
 
@@ -31,7 +31,7 @@ export default function JacketsContent() {
         Latest Collection
       </Typography>
       <Grid container>
-        {val.map((val) => {
+        {items.map((val) => {
           return (
             <Grid xs={12} md={4} xl={3} sx = {{my: 2}} item key={val.id}>
               <Card sx={{ maxWidth: 345 }}>
@@ -54,7 +54,6 @@ export default function JacketsContent() {
                 <CardActions>
                   <Button onClick={(e)=> {
                     e.preventDefault();
-                    dispatch(addHandler());
                     filterListHandler(val.id)
                     }} size="small" color="primary">
                     Add to Cart

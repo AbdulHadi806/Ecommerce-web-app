@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 // importing mui components
-import { Container, Typography, Button, CardActions, Card, CardContent,Grid,TextField, Input } from "@mui/material";
+import { Container, Typography, Button, CardActions, Card, CardContent,Grid,TextField } from "@mui/material";
 
 // importing redux 
 import { useSelector, useDispatch } from "react-redux"
@@ -17,8 +17,9 @@ export default function CheckOut() {
   const [userLoginNumber, setUserLoginNumber] = useState("")
   const [userLoginAddress, setUserLoginAddress] = useState("")
 
-    const data = useSelector(state => state.FilterList)
-    const totalPriceCounter = data.reduce((aucc, curr) => aucc + curr.price, 0)
+    const filterListItems = useSelector(state => state.FilterList)
+    const newFilterList = [...new Set(filterListItems)];
+    const totalPriceCounter = newFilterList.reduce((aucc, curr) => aucc + curr.price, 0)
     const totalPrice = totalPriceCounter.toFixed(2)
 
     const dispatch = useDispatch()
@@ -32,9 +33,7 @@ export default function CheckOut() {
       setUserLoginEmail('')
       setUserLoginNumber('')
       setUserLoginAddress('')
-      }
-      else {
-        alert("Please enter all values")
+      alert("Your order has been updated we will reach out to you within 24 hours")
       }
     }
 
@@ -69,7 +68,7 @@ export default function CheckOut() {
                   <TextField value={userLoginAddress} onChange={(e) => setUserLoginAddress(e.target.value)}  multiline placeholder="Type your address here" variant="outlined" fullWidth required />
                 </Grid>
                 <Grid item xs={12}>
-                  <Button  type='submit' variant="contained" color="primary" fullWidth>Submit</Button>
+                  <Button type='submit' variant="contained" color="primary" fullWidth>Submit</Button>
                 </Grid>
 
               </Grid>
