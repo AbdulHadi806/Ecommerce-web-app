@@ -1,6 +1,9 @@
+import {GETDATA, COUNTADD, CARTITEMS, COUNTREMOVE, REMOVEITEM, PRODUCTDETAILS, USERLOGIN} from "../redux/type.js"
+
+
 export const apiFetcherDispatch = (data) => {
     return {
-        type: 'GETDATA',
+        type: GETDATA,
         payload: data
     }
     
@@ -8,39 +11,39 @@ export const apiFetcherDispatch = (data) => {
 
 export const countAdd = () => {
     return {
-        type: 'COUNTADD'
+        type: COUNTADD
     }
 }
 
 export const filterList = (id) => {
     return {
-        type: 'CARTITEMS',
+        type: CARTITEMS,
         payload: id
     }
 }
 
 export const countRemove = () => {
     return {
-        type: 'COUNTREMOVE'
+        type: COUNTREMOVE
     }
 }
 export const removeItem = (id) => {
     return {
-        type: 'REMOVEITEM',
+        type: REMOVEITEM,
         payload: id
     }
 }
 
 export const descriptionHandler = (id) => {
     return {
-        type: 'PRODUCTDETAILS',
+        type: PRODUCTDETAILS,
         payload: id
     }
 }
 
 export const userLoginHandler = (data) => {
     return {
-        type: 'USERLOGIN',
+        type: USERLOGIN,
         payload: data
     }
 }

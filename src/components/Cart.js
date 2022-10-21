@@ -34,6 +34,9 @@ export default function Cart() {
     dispatch(removeItem(id));
   };
   
+  const countDecreaseHandler = () => {
+    dispatch(countRemove());
+  }
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
       <Typography variant='h3' textAlign={'center'}>
@@ -42,7 +45,6 @@ export default function Cart() {
       {newCartItems.map((data) => {
         return (
           <Grid key = {data.id} container sx={{ justifyContent: 'center' }}>
-
             <Grid xs={8} sx={{ my: 2 }} item>
               <Card>
                 <CardActionArea sx={{ display: "flex", width: "100%" }}>
@@ -69,9 +71,9 @@ export default function Cart() {
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
-                      itemDeleteHandler(data.id)
-                      dispatch(countRemove());
-                    }}
+                      itemDeleteHandler(data.id);
+                      countDecreaseHandler()
+                    }} sx = {{mt: "5px"}}
                     size="small"
                     color="primary"
                   >

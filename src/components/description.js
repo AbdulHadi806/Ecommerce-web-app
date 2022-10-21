@@ -17,8 +17,12 @@ export default function Description() {
     const handleAddCart = (e)=> {
       dispatch(filterList(e));
       }
+    const countAddHandler = () => {
+      dispatch(countAdd())
+    }  
+
   return (
-        <Container maxWidth='xl' sx={{ py: 4 }}>
+        <Container maxWidth='xl' sx={{ py: 6 }}>
       <Typography variant='h3' textAlign={'center'}>
         Latest Collection
       </Typography>
@@ -46,7 +50,7 @@ export default function Description() {
                     </CardContent>
                   </CardActionArea>
                   <CardActions sx = {{justifyContent:"flex-end"}}>
-                    <Button onClick={(e)=> {dispatch(countAdd());handleAddCart(data.id)}}  size="small" color="primary">
+                    <Button onClick={(e)=> {countAddHandler();handleAddCart(data.id)}}  size="small" color="primary">
                       Add to Cart
                     </Button>
                   </CardActions>

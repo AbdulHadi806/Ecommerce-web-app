@@ -23,13 +23,14 @@ const Header = () => {
 
             <Grid item xs={4} lg={4} sx={{ display: 'flex', flexWrap: "wrap", alignItems: "center", justifyContent: 'center' }}>
 
-                <Button><Link to="/" style={{ textDecoration: "none" }}> <Typography variant="h6" href='#' sx={{ textDecoration: 'none', color: 'color.primary.dark', pr: 1 }} >Home </Typography></Link></Button>
-                <Button><Link to="/Jackets" style={{ textDecoration: "none" }}> <Typography variant="h6" href='#' sx={{ textDecoration: 'none', color: 'color.primary.dark', pr: 1 }} >Men clothing</Typography></Link></Button>
-                <Button><Link to="/WomanClothsPage" style={{ textDecoration: "none" }} > <Typography variant="h6" href='#' sx={{ textDecoration: 'none', color: 'color.primary.dark', pr: 1 }} >Female</Typography></Link></Button>
-                <Button><Link to="/Electronics" style={{ textDecoration: "none" }}> <Typography variant="h6" href='#' sx={{ textDecoration: 'none', color: 'color.primary.dark', pr: 1 }} >Electronics</Typography></Link></Button>
+                <Button><Link to="/" style={{ textDecoration: "none" }}> <Typography variant="h6" href='#' sx={{ fontSize: 17 ,textDecoration: 'none', color: 'color.primary.dark'}} >Home </Typography></Link></Button>
+                <Button><Link to="/Jackets" style={{ textDecoration: "none" }}> <Typography variant="h6" href='#' sx={{fontSize: 17 , textDecoration: 'none', color: 'color.primary.dark'}} >Men clothing</Typography></Link></Button>
+                <Button><Link to="/WomanClothsPage" style={{ textDecoration: "none" }} > <Typography variant="h6" href='#' sx={{fontSize: 17 , textDecoration: 'none', color: 'color.primary.dark'}} >Female</Typography></Link></Button>
+                <Button><Link to="/Electronics" style={{ textDecoration: "none" }}> <Typography variant="h6" href='#' sx={{ fontSize: 17 ,textDecoration: 'none', color: 'color.primary.dark'}} >Electronics</Typography></Link></Button>
             </Grid>
             <Grid item xs={3} lg={4} sx={{ display: 'flex', flexWrap: "wrap", alignItems: "center", justifyContent: 'flex-end' }}>
-                <Button><Link to='/Cart' ><ShoppingCartIcon fontSize='large' /><Typography variant='h5' sx={{ position: 'absolute', right: -10, top: 7 }}>{Count}</Typography></Link></Button>
+            <Button variant="contained" sx = {{pr: 3, height: "100%",bgcolor: '#651fff'}}><Link to='/checkoutPage' style={{textDecoration: "none", color: "#fff"}} ><Typography variant='h5'>Checkout</Typography></Link></Button>
+                <Button><Link to='/Cart' ><ShoppingCartIcon fontSize='large' /><Typography variant='h5' sx={{position: 'absolute', right: -10, top: 7 }}>{Count}</Typography></Link></Button>
             </Grid>
         </Grid>
     )

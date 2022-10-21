@@ -1,3 +1,5 @@
+import {GETDATA, COUNTADD, CARTITEMS, COUNTREMOVE, REMOVEITEM, PRODUCTDETAILS, USERLOGIN} from "../redux/type.js"
+
 const initialState = {
   ShopItems: [],
   count: 0,
@@ -8,12 +10,12 @@ const initialState = {
 
 export default function Reducer(state = initialState, action) {
   switch (action.type) {
-    case "GETDATA":
+    case GETDATA:
       return {
         ...state,
         ShopItems: action.payload,
       };
-    case "CARTITEMS":
+    case CARTITEMS:
       return {
         ...state,
         CartItems: [
@@ -21,30 +23,30 @@ export default function Reducer(state = initialState, action) {
           ...state.ShopItems.filter((obj) => obj.id == action.payload)
         ]
       };
-    case "COUNTADD":
+    case COUNTADD:
         return {
           ...state, 
           count: state.count + 1
         }
-      case "COUNTREMOVE":
+      case COUNTREMOVE:
         if(state.count >= 0){
           return {
             ...state, 
             count: state.count - 1
           }
         }
-    case "REMOVEITEM":
+    case REMOVEITEM:
       return ({
         ...state,
         CartItems: state.CartItems.filter((obj) => obj.id !== action.payload),
       })
-    case "PRODUCTDETAILS":
+    case PRODUCTDETAILS:
       return {
         ...state,
         ProductDetails: 
           state.ShopItems.filter((obj) => obj.id == action.payload),
       };
-    case "USERLOGIN":
+    case USERLOGIN:
       return {
         ...state,
         UserLogin: [...state.UserLogin, action.payload],

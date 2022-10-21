@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from "react-redux"
 import {userLoginHandler} from '../redux/action'
 
 
+
+
 export default function CheckOut() {
   const [userLoginName, setUserLoginName] = useState("")
   const [userLoginLastName, setUserLoginLastName] = useState("")
@@ -17,7 +19,7 @@ export default function CheckOut() {
   const [userLoginNumber, setUserLoginNumber] = useState("")
   const [userLoginAddress, setUserLoginAddress] = useState("")
 
-    const filterListItems = useSelector(state => state.FilterList)
+    const filterListItems = useSelector(state => state.CartItems)
     const newFilterList = [...new Set(filterListItems)];
     const totalPriceCounter = newFilterList.reduce((aucc, curr) => aucc + curr.price, 0)
     const totalPrice = totalPriceCounter.toFixed(2)
@@ -39,13 +41,13 @@ export default function CheckOut() {
 
   return (
     <>
-    <Container maxWidth = 'xl'> 
+    <Container maxWidth = 'xl' sx = {{mt: 7}}> 
     <Grid container>
       <Grid item xs = {12} sm = {6}>
       <Card style={{ maxWidth: 500, padding: "20px 5px", margin: "0 auto" }}>
           <CardContent>
             <Typography gutterBottom variant="h5">
-              1. Shipping
+              1. Get notified about the shipment
           </Typography> 
             <Typography variant="body2" color="textSecondary" component="p" gutterBottom>
               Fill up the form and our team will get back to you within 24 hours.
@@ -68,7 +70,7 @@ export default function CheckOut() {
                   <TextField value={userLoginAddress} onChange={(e) => setUserLoginAddress(e.target.value)}  multiline placeholder="Type your address here" variant="outlined" fullWidth required />
                 </Grid>
                 <Grid item xs={12}>
-                  <Button type='submit' variant="contained" color="primary" fullWidth>Submit</Button>
+                  <Button type='submit' variant="contained" color="primary" fullWidth>Sign Up</Button>
                 </Grid>
 
               </Grid>

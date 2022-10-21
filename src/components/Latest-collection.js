@@ -19,6 +19,9 @@ function LastestCollection() {
   const cartListHandler = (id) => {
       dispatch(filterList(id));
   };
+  const countAddHandler = () => {
+    dispatch(countAdd())
+  }  
 
   return (
     <Container maxWidth='xl' sx={{ py: 4 }}>
@@ -28,8 +31,8 @@ function LastestCollection() {
       <Grid container>
         {items.map((val) => {
           return (
-            <Grid xs={12} md={4} xl={3} sx = {{my: 2}} item key={val.id}>
-              <Card sx={{ maxWidth: 345 }}>
+            <Grid xs={12} md={4} xl={3} sx = {{display: "flex", my: 2, justifyContent: "center", mx: 'auto'}} item key={val.id}>
+              <Card sx={{ width: 345, height: "100%",display: 'flex',flexDirection: 'column' }}>
                 <Link to="/description" onClick={(e)=> {dispatch(descriptionHandler(val.id))}} style={{color: '#000', textDecoration: "none"}}>
                 <CardActionArea>
                   <CardMedia
@@ -46,10 +49,10 @@ function LastestCollection() {
                   </CardContent>
                 </CardActionArea>
                 </Link>
-                <CardActions>
+                <CardActions sx = {{height: "100%", alignItems: 'flex-end'}}>
                   <Button onClick={(e)=> {
                     e.preventDefault();
-                    dispatch(countAdd())
+                    countAddHandler()
                     cartListHandler(val.id)
                     }} size="small" color="primary">
                     Add to Cart
