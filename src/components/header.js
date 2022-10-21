@@ -16,7 +16,7 @@ const Header = () => {
     const Count = useSelector(state => state.count)
 
     return (
-        <Grid container sx={{ py: 2, px: 3 }}>
+        <Grid container sx={{ py: 2, px: 3, position: "fixed", top: 0, bottom: 0, height: 100, zIndex: 3, bgcolor: "#fff" }}>
             <Grid item xs={4} lg={4}>
                 <Link to="/" sx={{ color: 'color.primary.header' }}><DoneIcon fontSize='large' /></Link>
             </Grid>

@@ -28,20 +28,17 @@ export default function CheckOut() {
 
     const LoginHandler = (e) => {
       e.preventDefault()
-      if(userLoginName && userLoginLastName && userLoginEmail && userLoginNumber && userLoginAddress){
         dispatch(userLoginHandler({FirstName: userLoginName, LastName: userLoginLastName, Email: userLoginEmail, Number: userLoginNumber, address: userLoginAddress, id: Math.random()}))
         setUserLoginName('')
       setUserLoginLastName('')
       setUserLoginEmail('')
       setUserLoginNumber('')
       setUserLoginAddress('')
-      alert("Your order has been updated we will reach out to you within 24 hours")
       }
-    }
 
   return (
     <>
-    <Container maxWidth = 'xl' sx = {{mt: 7}}> 
+    <Container maxWidth = 'xl' sx = {{mt: 15}}> 
     <Grid container>
       <Grid item xs = {12} sm = {6}>
       <Card style={{ maxWidth: 500, padding: "20px 5px", margin: "0 auto" }}>
