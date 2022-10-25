@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, {  useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -11,82 +10,166 @@ import {
   Container,
   Typography,
   Grid,
-  CardActionArea,
+  TextField,
   CardActions,
   Button,
   Card,
   CardContent,
   CardMedia,
+  Box,
 } from "@mui/material";
 
 // importing actions here
-import { removeItem, countRemove } from "../redux/action";
+import { removeItem } from "../redux/action";
 
 export default function Cart() {
+  const [count, setCount] = useState([1]);
   const CartItems = useSelector((state) => state.CartItems);
-  
-  const newCartItems = [...new Set(CartItems)];
+
+  console.log(CartItems, "Cart items")
 
 
+  const setCountValue = (e) => {
+    e.preventDefault();
+    if(e.target.value > 0 && e.target.value <= 5){
+      setCount( e.target.value);
+    }
+  };
+
+
+  const shippingTaxes = CartItems.reduce(
+    (aucc, curr) => aucc - curr.price + 33 * count,
+    0
+  );
+  const shippingTaxesTotal = Math.abs(shippingTaxes);
+  const shippingTaxesTotalVal = shippingTaxesTotal.toFixed(2);
+
+  const totalPriceCounter = CartItems.reduce(
+    (aucc, curr) => aucc + curr.price * count,
+    shippingTaxesTotal
+  );
+
+  const totalPrice = totalPriceCounter.toFixed(2);
 
   const dispatch = useDispatch();
   const itemDeleteHandler = (id) => {
     dispatch(removeItem(id));
   };
-  
-  const countDecreaseHandler = () => {
-    dispatch(countRemove());
-  }
+ 
   return (
-    <Container maxWidth="xl" sx={{ py: 4 }}>
-      <Typography variant='h3' textAlign={'center'}>
-      Your Current Cart
+    <Container
+      maxWidth="xl"
+      sx={{
+        py: 20,
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+      }}
+    >
+      {/* import { styled } from '@mui/material/styles'; */}
+      <Typography variant="h3" sx={{ textAlign: "center", width: "100%" }}>
+        Your Current Cart
       </Typography>
-      {newCartItems.map((data) => {
+      <Box sx = {{maxWidth: "992px",width: "100%" }}>
+      <Box>
+        <Card>
+          <CardContent>
+            <Typography variant="h5" gutterBottom>
+              Your Cart
+            </Typography>
+            <Typography variant="h5" color="text.secondary" component="div">
+              <Typography>
+                Shipping Taxes: {shippingTaxesTotalVal} USD
+              </Typography>
+            </Typography>
+            <Typography variant="h5" color="text.secondary" component="div">
+              Subtotal
+            </Typography>
+            <Typography
+              variant="h5"
+              color="text.secondary"
+              component="div"
+              sx={{ fontSize: 14 }}
+            >
+              {totalPrice} USD
+            </Typography>
+          </CardContent>
+        </Card>
+      </Box>
+      </Box>
+      {CartItems.map((data) => {
         return (
-          <Grid key = {data.id} container sx={{ justifyContent: 'center' }}>
-            <Grid xs={8} sx={{ my: 2 }} item>
-              <Card>
-                <CardActionArea sx={{ display: "flex", width: "100%" }}>
-                  <CardMedia
-                    component="img"
-                    height="280"
-                    image={data.image}
-                    alt="hello"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {data.title}
-                    </Typography>
-                    <Typography gutterBottom component="div">
-                      {data.description}
-                    </Typography>
-                    <Typography sx={{ pt: 3 }}>
-                      Rating: {data.rating.rate} stars
-                    </Typography>
-                    <Typography>Price: {data.price} USD</Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions sx={{ justifyContent: "flex-end" }}>
-                  <Button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      itemDeleteHandler(data.id);
-                      countDecreaseHandler()
-                    }} sx = {{mt: "5px"}}
-                    size="small"
-                    color="primary"
-                  >
-                    Remove From Cart
-                  </Button>
-                  <Link
-                    to="/checkoutPage"
-                    style={{ color: "#000", textDecoration: "none" }}
-                  >
-                    <Button>Go to Checkout</Button>
-                  </Link>
-                </CardActions>
-              </Card>
+          <Grid container key={data.id}>
+            <Grid
+              sm={12}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <Grid xs={8} sx={{ my: 2 }} item>
+                <Card>
+                  <Box sx={{ p: 2, display: "flex", width: "100%" }}>
+                    <CardMedia style = {{objectFit: "contain"}}
+                      component="img"
+                      height="280"
+                      sx = {{width: 240, height: 240,}}
+                      image={data.image}
+                      alt="hello"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {data.title}
+                      </Typography>
+                      <Typography gutterBottom component="div">
+                        {data.description}
+                      </Typography>
+                      <Box sx={{ display: "flex" }}>
+                        <Box>
+                          <Typography sx={{ pt: 3 }}>
+                            Rating: {data.rating.rate} stars
+                          </Typography>
+                          <Typography>Price: {data.price} USD</Typography>
+                        </Box>
+                        <TextField
+                          sx={{ mt: 2, ml: 2 }}
+                          hiddenLabel
+                          value={data.count}
+                          onChange={setCountValue}
+                          min={0}
+                          max={5}
+                          type="number"
+                          variant="filled"
+                          size="small"
+                        />
+                      </Box>
+                    </CardContent>
+                  </Box>
+                  <CardActions sx={{ justifyContent: "flex-end" }}>
+                    <Link
+                      to="/checkoutPage"
+                      style={{ color: "#000", textDecoration: "none" }}
+                    >
+                      <Button sx = {{width: "200px", bgcolor: "#000", color: "#fff", height: "46px", ':hover': {
+                      bgcolor: '#212121', 
+                    },}}>Go to Checkout</Button>
+                    </Link>
+                    <Button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        itemDeleteHandler(data.id);
+                      }}
+                      size="medium"
+                      sx = {{width: "200px", ml: 1, bgcolor: "#000", color: "#fff", height: "46px", ':hover': {
+                        bgcolor: '#212121', 
+                      },}}
+                    >
+                      Remove From Cart
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
             </Grid>
           </Grid>
         );

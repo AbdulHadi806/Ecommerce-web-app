@@ -20,6 +20,8 @@ import DescriptionPage from "./navigationComponents/descriptionPage"
 
 // importing components
 import Header from "./components/header.js";  
+import Footer from "./components/footer.js";
+
 
 // custom Theme
 export const theme = createTheme({
@@ -51,7 +53,6 @@ function App() {
       try {
         const response = await fetch(api);
         const data = await response.json();
-
         dispatch(apiFetcherDispatch(data));
       } catch (error) {
         console.log(error + "This is an error");
@@ -73,9 +74,9 @@ function App() {
           <Route path="/WomanClothsPage" element={<WomanClothsPage />}></Route>
           <Route path="/checkoutPage" element={<CheckoutPage />}></Route>
           <Route path="/description" element={<DescriptionPage />}></Route>
-
         </Routes>
       </div>
+      <Footer />
     </Router>
   );
 }

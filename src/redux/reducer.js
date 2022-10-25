@@ -2,13 +2,13 @@ import {GETDATA, COUNTADD, CARTITEMS, COUNTREMOVE, REMOVEITEM, PRODUCTDETAILS, U
 
 const initialState = {
   ShopItems: [],
-  count: 0,
   CartItems: [],
   ProductDetails: [],
   UserLogin: [],
 };
 
 export default function Reducer(state = initialState, action) {
+  console.log(action)
   switch (action.type) {
     case GETDATA:
       return {
@@ -16,30 +16,18 @@ export default function Reducer(state = initialState, action) {
         ShopItems: action.payload,
       };
     case CARTITEMS:
+      console.log({...state,CartItems: [...state.CartItems, {...action.payload, count: (action.payload.count || 0) + 1}]})
       return {
         ...state,
-        CartItems: [
-          ...state.CartItems,
-          ...state.ShopItems.filter((obj) => obj.id == action.payload)
-        ]
-      };
-    case COUNTADD:
-        return {
-          ...state, 
-          count: state.count + 1
-        }
-      case COUNTREMOVE:
-        if(state.count >= 0){
-          return {
-            ...state, 
-            count: state.count - 1
-          }
-        }
+        CartItems: [...state.CartItems, {...action.payload, count: (action.payload.count || 0) + 1}]
+      }
+      
     case REMOVEITEM:
       return ({
         ...state,
         CartItems: state.CartItems.filter((obj) => obj.id !== action.payload),
       })
+    
     case PRODUCTDETAILS:
       return {
         ...state,

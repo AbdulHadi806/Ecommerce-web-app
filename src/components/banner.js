@@ -11,6 +11,6 @@ export default function Banner() {
   const classes = useStyles();
 
   return (
-        <img className={classes.imageStyle} src='images/banner-image.jpg'  ></img>
+        <img className={classes.imageStyle} src='images/banner-image.png'  ></img>
   )
 }

@@ -3,34 +3,124 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom";
 
 
-// importing MUI compoenents here
-import { Typography, Grid, Button } from "@mui/material";
 
+// importing MUI compoenents here
+import { Grid, Button,Drawer,List,Typography,Divider} from "@mui/material";
+import { styled, useTheme } from '@mui/material/styles';
 
 // importing icons
 import DoneIcon from '@mui/icons-material/Done';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import IconButton from '@mui/material/IconButton';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
+const drawerWidth = "100%";
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-start',
+}));
 
 const Header = () => {
-    const Count = useSelector(state => state.count)
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
 
+  const handleDrawerOpen = () => {
+      setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+      setOpen(false);
+  };
+    const CartItems = useSelector((state) => state.CartItems);
+  const newCartItems = [...new Set(CartItems)];
+  const TotalCount =  newCartItems.length
     return (
-        <Grid container sx={{ py: 2, px: 3, position: "fixed", top: 0, bottom: 0, height: 100, zIndex: 3, bgcolor: "#fff" }}>
-            <Grid item xs={4} lg={4}>
-                <Link to="/" sx={{ color: 'color.primary.header' }}><DoneIcon fontSize='large' /></Link>
+          <Grid open={open} container sx={{bgcolor: "#000", py: 2, px: 3, position: "fixed", top: 0, bottom: 0, height: 100, zIndex: 3, alignItems: "center" }}>
+            <Grid item>
+                <Link to="/" ><DoneIcon sx={{ color: '#fff' }} fontSize='large' /></Link>
             </Grid>
-
-            <Grid item xs={4} lg={4} sx={{ display: 'flex', flexWrap: "wrap", alignItems: "center", justifyContent: 'center' }}>
-
-                <Button><Link to="/" style={{ textDecoration: "none" }}> <Typography variant="h6" href='#' sx={{ fontSize: 17 ,textDecoration: 'none', color: 'color.primary.dark'}} >Home </Typography></Link></Button>
-                <Button><Link to="/Jackets" style={{ textDecoration: "none" }}> <Typography variant="h6" href='#' sx={{fontSize: 17 , textDecoration: 'none', color: 'color.primary.dark'}} >Men clothing</Typography></Link></Button>
-                <Button><Link to="/WomanClothsPage" style={{ textDecoration: "none" }} > <Typography variant="h6" href='#' sx={{fontSize: 17 , textDecoration: 'none', color: 'color.primary.dark'}} >Female</Typography></Link></Button>
-                <Button><Link to="/Electronics" style={{ textDecoration: "none" }}> <Typography variant="h6" href='#' sx={{ fontSize: 17 ,textDecoration: 'none', color: 'color.primary.dark'}} >Electronics</Typography></Link></Button>
+            <Grid item xs = {1} lg = {1}>
+            <Button ><MenuOpenIcon
+                            color="inherit"
+                            aria-label="open drawer"
+                            edge="end"
+                            onClick={handleDrawerOpen}
+                            sx={{color: "#fff", ':hover': {
+                              bgcolor: '#212121',
+                          },}}
+                        /></Button>
             </Grid>
-            <Grid item xs={3} lg={4} sx={{ display: 'flex', flexWrap: "wrap", alignItems: "center", justifyContent: 'flex-end' }}>
-            <Button variant="contained" sx = {{pr: 3, height: "100%",bgcolor: '#651fff'}}><Link to='/checkoutPage' style={{textDecoration: "none", color: "#fff"}} ><Typography variant='h5'>Checkout</Typography></Link></Button>
-                <Button><Link to='/Cart' ><ShoppingCartIcon fontSize='large' /><Typography variant='h5' sx={{position: 'absolute', right: -10, top: 7 }}>{Count}</Typography></Link></Button>
+            <Grid item xs={4} lg={2} sx={{ display: 'flex', flexWrap: "wrap", alignItems: "center", justifyContent: 'center' }}>
+            <Drawer
+                sx={{
+                    width: drawerWidth,
+                    flexShrink: 0,
+                    '& .MuiDrawer-paper': {
+                        width: drawerWidth,
+                    },
+                }}
+                variant="persistent"
+                anchor="right"
+                open={open}
+            >
+                <DrawerHeader >
+                    <IconButton onClick={handleDrawerClose}>
+                        {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                    </IconButton>
+                </DrawerHeader>
+                <Divider />
+                <List sx = {{height: "272px"}}>
+                    <Grid container sx = {{ height: "272px"}}>
+                        <Grid item xs = {12} >
+                            <Button onClick={handleDrawerClose} sx={{
+                                width: "100%",
+                                ':hover': {
+                                    bgcolor: '#9e9e9e',
+                                },
+                            }}><Link to="/" style={{ textDecoration: "none" }}> <Typography variant="h6" href='#' sx={{ fontSize: 17, textDecoration: 'none', color: '#000' }} >Home </Typography></Link></Button>
+                            <Grid item>
+                            <Link to="/Jackets" style={{ textDecoration: "none" }}>
+                                <Button onClick={handleDrawerClose} sx={{
+                                    width: "100%",
+                                    ':hover': {
+                                        bgcolor: '#9e9e9e',
+                                    },
+                                }}> <Typography variant="h6" href='#' sx={{ fontSize: 17, textDecoration: 'none', color: '#000' }} >Men clothing</Typography></Button></Link>
+                            </Grid>
+                            <Grid item>
+                            <Link to="/WomanClothsPage" style={{ textDecoration: "none" }} >
+                                <Button onClick={handleDrawerClose} sx={{
+                                    width: "100%",
+                                    ':hover': {
+                                        bgcolor: '#9e9e9e',
+                                    },
+                                }}> <Typography variant="h6" href='#' sx={{ fontSize: 17, textDecoration: 'none', color: '#000' }} >Female</Typography></Button></Link></Grid>
+                            <Grid item>
+                            <Link to="/Electronics" style={{ textDecoration: "none" }}>
+                                <Button onClick={handleDrawerClose} sx={{
+                                    width: "100%",
+                                    ':hover': {
+                                        bgcolor: '#9e9e9e',
+                                    },
+                                }}> <Typography variant="h6" href='#' sx={{ fontSize: 17, textDecoration: 'none', color: '#000' }} >Electronics</Typography></Button>
+                            </Link>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </List>
+            </Drawer>
+            </Grid>
+            <Grid item xs={3} lg={8} sx={{ display: 'flex', flexWrap: "wrap", alignItems: "center", justifyContent: 'flex-end', pl: 2 }}>
+            <Button variant="contained" size="small" sx = {{ height: "60%",bgcolor: '#fff',':hover': {
+                      bgcolor: '#e0e0e0'
+                    },}}><Link to='/checkoutPage' style={{textDecoration: "none", color: "#000"}} ><Typography variant='h7' >Sign Up</Typography></Link></Button>
+                <Button sx = {{p: "0"}}><Link to='/Cart' ><ShoppingCartIcon sx = {{color: "#fff"}} fontSize='large' /><Typography variant='h5' sx={{position: 'absolute', right: -10, top: 7, color: "#fff" }}>{TotalCount}</Typography></Link></Button>
             </Grid>
         </Grid>
     )

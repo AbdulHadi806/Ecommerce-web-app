@@ -6,7 +6,7 @@ import {
   Container,
   Typography,
   Grid,
-  CardActionArea,
+  Box,
   CardActions,
   Button,
   Card,
@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 
 // importing actions here
-import { filterList, countAdd } from "../redux/action";
+import { filterList } from "../redux/action";
 
 export default function Description() {
   const itemsDescription = useSelector((state) => state.ProductDetails);
@@ -25,12 +25,9 @@ export default function Description() {
   const handleAddCart = (e) => {
     dispatch(filterList(e));
   };
-  const countAddHandler = () => {
-    dispatch(countAdd());
-  };
 
   return (
-    <Container maxWidth="xl" sx={{ py: 6 }}>
+    <Container maxWidth="xl" sx={{ mt: 21, mb:48 }}>
       <Typography variant="h3" textAlign={"center"}>
         Latest Collection
       </Typography>
@@ -39,11 +36,12 @@ export default function Description() {
           return (
             <Grid key={data.id} xs={7} sx={{ my: 2 }} item>
               <Card maxWidth="lg">
-                <CardActionArea sx={{ display: "flex", width: "100%" }}>
-                  <CardMedia
+                <Box sx={{p: 2, display: "flex", width: "100%" }}>
+                  <CardMedia style = {{objectFit: "contain"}}
                     component="img"
                     height="280"
                     image={data.image}
+                    sx = {{width: 240, height: 240,}}
                     alt="hello"
                   />
                   <CardContent>
@@ -58,15 +56,17 @@ export default function Description() {
                     </Typography>
                     <Typography>Price: {data.price} USD</Typography>
                   </CardContent>
-                </CardActionArea>
+                  </Box>
                 <CardActions sx={{ justifyContent: "flex-end" }}>
                   <Button
                     onClick={(e) => {
-                      countAddHandler();
                       handleAddCart(data.id);
                     }}
                     size="small"
-                    color="primary"
+                    variant = "contained" sx = {{width: "100%", bgcolor: "#000", color: "#fff", height: "46px",borderRadius: 0, ':hover': {
+                      bgcolor: '#212121', 
+                    },
+                }}
                   >
                     Add to Cart
                   </Button>
