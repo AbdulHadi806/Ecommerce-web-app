@@ -16,8 +16,8 @@ function LastestCollection() {
 
 
   const dispatch = useDispatch()
-  const cartListHandler = (id) => {
-      dispatch(filterList(id));
+  const cartListHandler = (obj) => {
+      dispatch(filterList(obj));
   };
 
   return (
@@ -49,7 +49,7 @@ function LastestCollection() {
                 <CardActions sx = {{height: "100%", alignItems: 'flex-end'}}>
                   <Button onClick={(e)=> {
                     e.preventDefault();
-                    cartListHandler(val.id);
+                    cartListHandler(val);
                     }} size="small"  variant = "contained" sx = {{width: "100%", bgcolor: "#000",borderRadius: 0, color: "#fff", height: "46px", ':hover': {
                       bgcolor: '#212121', 
                     },}}>

@@ -21,8 +21,8 @@ export default function WomanCloths() {
 
   const dispatch = useDispatch()
 
-  const filterListHandler = (id) => {
-      dispatch(filterList(id));
+  const filterListHandler = (obj) => {
+      dispatch(filterList(obj));
   }; 
  
 
@@ -55,7 +55,7 @@ export default function WomanCloths() {
                 <CardActions sx = {{height: "100%", alignItems: 'flex-end'}}>
                   <Button onClick={(e)=> {
                     e.preventDefault();
-                    filterListHandler(val.id)
+                    filterListHandler(val)
                     }} size="small" variant = "contained" sx = {{width: "100%", bgcolor: "#000", borderRadius: 0, color: "#fff", height: "46px", ':hover': {
                       bgcolor: '#212121', 
                     },}}>

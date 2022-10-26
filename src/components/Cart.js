@@ -2,6 +2,10 @@ import React, {  useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
+
+// importing MUI Icons
+import AddIcon from '@mui/icons-material/Add';
+
 // importing react router dom Link
 import { Link } from "react-router-dom";
 
@@ -20,32 +24,28 @@ import {
 } from "@mui/material";
 
 // importing actions here
-import { removeItem } from "../redux/action";
+import { removeItem,filterList } from "../redux/action";
 
 export default function Cart() {
-  const [count, setCount] = useState([1]);
   const CartItems = useSelector((state) => state.CartItems);
-
-  console.log(CartItems, "Cart items")
-
-
-  const setCountValue = (e) => {
-    e.preventDefault();
-    if(e.target.value > 0 && e.target.value <= 5){
-      setCount( e.target.value);
-    }
-  };
-
-
+  const increaseDecreaseCount = (count) => {
+     let Count = count
+     let finalCount = Count -1
+     console.log(Count)
+     return finalCount
+  }
+  const cartListHandler = (obj) => {
+    dispatch(filterList(obj));
+};
   const shippingTaxes = CartItems.reduce(
-    (aucc, curr) => aucc - curr.price + 33 * count,
+    (aucc, curr) => aucc - curr.price + 33 * curr.count,
     0
   );
   const shippingTaxesTotal = Math.abs(shippingTaxes);
   const shippingTaxesTotalVal = shippingTaxesTotal.toFixed(2);
 
   const totalPriceCounter = CartItems.reduce(
-    (aucc, curr) => aucc + curr.price * count,
+    (aucc, curr) => aucc + curr.price * curr.count,
     shippingTaxesTotal
   );
 
@@ -55,7 +55,6 @@ export default function Cart() {
   const itemDeleteHandler = (id) => {
     dispatch(removeItem(id));
   };
- 
   return (
     <Container
       maxWidth="xl"
@@ -136,13 +135,10 @@ export default function Cart() {
                           sx={{ mt: 2, ml: 2 }}
                           hiddenLabel
                           value={data.count}
-                          onChange={setCountValue}
-                          min={0}
-                          max={5}
-                          type="number"
                           variant="filled"
                           size="small"
                         />
+                        <Button onClick={()=>{cartListHandler(data)}}><AddIcon sx ={{color: "#000"}} /></Button>
                       </Box>
                     </CardContent>
                   </Box>

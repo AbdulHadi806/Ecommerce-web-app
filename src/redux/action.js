@@ -1,4 +1,4 @@
-import {GETDATA, CARTITEMS,COUNTADD,COUNTREMOVE , REMOVEITEM, PRODUCTDETAILS, USERLOGIN} from "../redux/type.js"
+import {GETDATA, ADDCARTITEMS,COUNTADD,COUNTREMOVE , REMOVEITEM, PRODUCTDETAILS, USERLOGIN} from "../redux/type.js"
 
 
 export const apiFetcherDispatch = (data) => {
@@ -11,7 +11,7 @@ export const apiFetcherDispatch = (data) => {
 
 export const filterList = (obj) => {
     return {
-        type: CARTITEMS,
+        type: ADDCARTITEMS,
         payload: obj
     }
 }

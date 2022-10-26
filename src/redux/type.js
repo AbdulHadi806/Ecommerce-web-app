@@ -2,7 +2,7 @@ export const GETDATA = "GETDATA"
 
 export const COUNTADD = "COUNTADD"
 
-export const CARTITEMS = "CARTITEMS"
+export const ADDCARTITEMS = "CARTITEMS"
 
 export const COUNTREMOVE = "COUNTREMOVE"
 

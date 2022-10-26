@@ -53,7 +53,7 @@ export default function ElectronicsItem() {
                 <CardActions sx = {{height: "100%", alignItems: 'flex-end'}}>
                   <Button onClick={(e)=> {
                     e.preventDefault();
-                    cartListHandler(val.id)
+                    cartListHandler(val)
                     }} size="small" variant = "contained" sx = {{width: "100%", bgcolor: "#000",borderRadius: 0, color: "#fff", height: "46px", ':hover': {
                       bgcolor: '#212121', 
                     },}}>

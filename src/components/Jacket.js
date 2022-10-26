@@ -11,19 +11,23 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 
 // importing action
-import {filterList, descriptionHandler} from '../redux/action'
+import {filterList, descriptionHandler, countAdd} from '../redux/action'
 
 export default function JacketsContent() {
     const data = useSelector(state => state.ShopItems)
+
     const items = data.filter(data => {
         return data.category.indexOf("men's clothing") !== -1;
     })
 
   const dispatch = useDispatch()
 
-  const cartListHandler = (obj) => {
-      dispatch(filterList(obj));
+  const cartListHandler = (id) => {
+      dispatch(filterList(id));
   }; 
+  const countAddHandler = () => {
+    dispatch(countAdd())
+  }  
 
   return (
     <Container maxWidth='xl' sx={{ mt: 16 }}>
@@ -54,6 +58,7 @@ export default function JacketsContent() {
                 <CardActions sx = {{height: "100%", alignItems: 'flex-end'}}>
                   <Button onClick={(e)=> {
                     e.preventDefault();
+                    countAddHandler()
                     cartListHandler(val)
                     }} size="small" variant = "contained" sx = {{width: "100%", bgcolor: "#000",borderRadius: 0, color: "#fff", height: "46px", ':hover': {
                       bgcolor: '#212121', 

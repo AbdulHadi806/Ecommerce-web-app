@@ -60,7 +60,7 @@ export default function Description() {
                 <CardActions sx={{ justifyContent: "flex-end" }}>
                   <Button
                     onClick={(e) => {
-                      handleAddCart(data.id);
+                      handleAddCart(data);
                     }}
                     size="small"
                     variant = "contained" sx = {{width: "100%", bgcolor: "#000", color: "#fff", height: "46px",borderRadius: 0, ':hover': {
