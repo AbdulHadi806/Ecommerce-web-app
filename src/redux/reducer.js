@@ -63,10 +63,10 @@ export default function Reducer(state = initialState, action) {
     return {                                                      // [0 = emai, 1 = password]
       ...state, currentUser: auth.createUserWithEmailAndPassword(action.payload[0], action.payload[1])
     }
-  case userLogin:
-    return {
-      ...state, currentUser: auth.signInWithEmailAndPassword(action.payload[0], action.payload[1])
-    }
+  // case userLogin:
+  //   return {
+  //     ...state, currentUser: auth.signInWithEmailAndPassword(action.payload[0], action.payload[1])
+  //   }
     case PRODUCTDETAILS:
   return {
     ...state,
