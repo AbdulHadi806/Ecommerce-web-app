@@ -10,4 +10,6 @@ export const REMOVEITEM = "REMOVEITEM"
 
 export const PRODUCTDETAILS = "PRODUCTDETAILS"
 
-export const USERLOGIN = "USERLOGIN"
+export const ADDUSERSIGNIN = "ADDUSERSIGNIN"
+
+export const userLogin = "userLogin"

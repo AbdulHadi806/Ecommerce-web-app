@@ -20,6 +20,7 @@ import { filterList } from "../redux/action";
 export default function Description() {
   const itemsDescription = useSelector((state) => state.ProductDetails);
 
+
   const dispatch = useDispatch();
 
   const handleAddCart = (e) => {

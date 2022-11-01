@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { auth } from "../firebase";
 
 // importing mui components
 import {
@@ -12,45 +13,27 @@ import {
   TextField,
 } from "@mui/material";
 
-import { Link, useNavigate } from "react-router-dom";
+// importing react router components
+import { Link } from "react-router-dom";
 
-// importing actions here
-import { userSignInHandler } from "../redux/action";
-
-// react-redux 
-import { useDispatch } from "react-redux";
-
-
-export default function SignUp() {
+export default function ChangePassword() {
   const [email, setEmail] = useState("");
-  const [password, setpassword] = useState("");
-  const [passwordConfirm, setpasswordConfirm] = useState("");
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("")
   const [Loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
+  const resetPassword = (email) => {  
+    return auth.sendPasswordResetEmail(email)
+  };
   async function handleSubmit(e) {
     e.preventDefault();
-    const characters = email.slice(-4)
-    if(characters !== ".com"){
-      return setError("Incorrect Email Format")
-    }
-
-    if (passwordConfirm.length < 6) {
-      return setError("Password must be 6 characters longer");
-    }
-    if (password !== passwordConfirm) {
-      return setError("Passwords not matched");
-    }
     try {
       setError("");
+      setMessage("")
       setLoading(true);
-      await dispatch(userSignInHandler(email, password));
-      setEmail("");
-      navigate("/SignIn");
+      await resetPassword(email);
+      setMessage("Check you inbox for the verification key")
     } catch {
-      setError("Fail to login");
+      setError("Fail to reset Password");
     }
     setLoading(false);
   }
@@ -72,10 +55,11 @@ export default function SignUp() {
               style={{ maxWidth: 500, padding: "20px 5px", margin: "0 auto" }}
             >
               <CardContent>
+              {message && <Alert severity="success">{message}</Alert>}
                 {error && <Alert severity="error">{error}</Alert>}
 
                 <Typography gutterBottom variant="h5">
-                  Sign Up
+                  Reset Password
                 </Typography>
                 <Typography
                   variant="body2"
@@ -83,7 +67,8 @@ export default function SignUp() {
                   component="p"
                   gutterBottom
                 >
-                  Please Sign in to Verify Your Self
+                  Fill up the form and our team will get back to you within 24
+                  hours.
                 </Typography>
                 <form onSubmit={handleSubmit}>
                   <Grid container spacing={1}>
@@ -100,51 +85,21 @@ export default function SignUp() {
                         required
                       />
                     </Grid>
-
-                    <Grid item xs={12}>
-                      <TextField
-                        multiline
-                        placeholder="Type Password"
-                        type="password"
-                        onChange={(e) => {
-                          setpassword(e.target.value);
-                        }}
-                        variant="outlined"
-                        fullWidth
-                        required
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        multiline
-                        placeholder="Confirm Password"
-                        type="password"
-                        onChange={(e) => {
-                          setpasswordConfirm(e.target.value);
-                        }}
-                        variant="outlined"
-                        fullWidth
-                        required
-                      />
-                    </Grid>
                     <Grid item xs={12}>
                       <Button
                         type="submit"
                         variant="contained"
-                        onChange={(e) => {
-                          setpassword(e.target.value);
-                        }}
                         disabled={Loading}
                         color="primary"
                         fullWidth
                       >
-                        Sign Up
+                        Change Password
                       </Button>
                     </Grid>
                   </Grid>
                 </form>
                 <Typography sx={{ mt: 3, textAlign: "center" }}>
-                  Already have an account? <Link to="/SignIn">Sign In</Link>
+                  Move to <Link to="/SignUp">Login page</Link>
                 </Typography>
               </CardContent>
             </Card>

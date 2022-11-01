@@ -21,6 +21,10 @@ import DescriptionPage from "./navigationComponents/descriptionPage"
 // importing components
 import Header from "./components/header.js";  
 import Footer from "./components/footer.js";
+import SignIn from "./components/Login"
+import SignUp from "./components/checkOut"
+import Dashboard from "./components/dashboard"
+import ChangePassword from "./components/ResetPassword"
 
 
 // custom Theme
@@ -74,6 +78,10 @@ function App() {
           <Route path="/WomanClothsPage" element={<WomanClothsPage />}></Route>
           <Route path="/checkoutPage" element={<CheckoutPage />}></Route>
           <Route path="/description" element={<DescriptionPage />}></Route>
+          <Route path="/SignIn" element={<SignIn/>}></Route>
+          <Route path="/SignUp" element={<SignUp />}></Route>
+          <Route path="/Dashboard" element={<Dashboard />}></Route>
+          <Route path="/ChangePassword" element={<ChangePassword />}></Route>
         </Routes>
       </div>
       <Footer />

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { auth } from "../firebase";
 
 // importing mui components
 import {
@@ -15,40 +16,29 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 
 // importing actions here
-import { userSignInHandler } from "../redux/action";
+import { userLoginHandler } from "../redux/action";
 
 // react-redux 
 import { useDispatch } from "react-redux";
 
-
-export default function SignUp() {
+export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
-  const [passwordConfirm, setpasswordConfirm] = useState("");
   const [error, setError] = useState("");
   const [Loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
+  const Login = (email, password) => {
+    return auth.signInWithEmailAndPassword(email, password);
+  };
   async function handleSubmit(e) {
     e.preventDefault();
-    const characters = email.slice(-4)
-    if(characters !== ".com"){
-      return setError("Incorrect Email Format")
-    }
-
-    if (passwordConfirm.length < 6) {
-      return setError("Password must be 6 characters longer");
-    }
-    if (password !== passwordConfirm) {
-      return setError("Passwords not matched");
-    }
     try {
       setError("");
       setLoading(true);
-      await dispatch(userSignInHandler(email, password));
+      await Login(email, password)
       setEmail("");
-      navigate("/SignIn");
+      navigate("/Dashboard");
     } catch {
       setError("Fail to login");
     }
@@ -75,7 +65,7 @@ export default function SignUp() {
                 {error && <Alert severity="error">{error}</Alert>}
 
                 <Typography gutterBottom variant="h5">
-                  Sign Up
+                  Sign in
                 </Typography>
                 <Typography
                   variant="body2"
@@ -115,19 +105,6 @@ export default function SignUp() {
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextField
-                        multiline
-                        placeholder="Confirm Password"
-                        type="password"
-                        onChange={(e) => {
-                          setpasswordConfirm(e.target.value);
-                        }}
-                        variant="outlined"
-                        fullWidth
-                        required
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
                       <Button
                         type="submit"
                         variant="contained"
@@ -138,13 +115,17 @@ export default function SignUp() {
                         color="primary"
                         fullWidth
                       >
-                        Sign Up
+                        Sign in
                       </Button>
                     </Grid>
                   </Grid>
                 </form>
                 <Typography sx={{ mt: 3, textAlign: "center" }}>
-                  Already have an account? <Link to="/SignIn">Sign In</Link>
+                  Already forgot the password?{" "}
+                  <Link to="/ChangePassword">Reset Password</Link>
+                </Typography>
+                <Typography sx={{ mt: 3, textAlign: "center" }}>
+                  Don't have an account? <Link to="/SignUp">Sign Up</Link>
                 </Typography>
               </CardContent>
             </Card>
