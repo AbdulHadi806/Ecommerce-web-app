@@ -15,11 +15,7 @@ import {
 
 import { Link, useNavigate } from "react-router-dom";
 
-// importing actions here
-import { userLoginHandler } from "../redux/action";
 
-// react-redux 
-import { useDispatch } from "react-redux";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");

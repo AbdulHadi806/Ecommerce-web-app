@@ -28,14 +28,14 @@ export default function Description() {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ mt: 21, mb:48 }}>
+    <Container maxWidth="xl" sx={{ mt: 21, mb:'197px' }}>
       <Typography variant="h3" textAlign={"center"}>
         Latest Collection
       </Typography>
       <Grid container sx={{ justifyContent: "center" }}>
         {itemsDescription.map((data) => {
           return (
-            <Grid key={data.id} xs={7} sx={{ my: 2 }} item>
+            <Grid key={data.id} xs={7} sx={{ my: 1 }} item>
               <Card maxWidth="lg">
                 <Box sx={{p: 2, display: "flex", width: "100%" }}>
                   <CardMedia style = {{objectFit: "contain"}}

@@ -22,7 +22,7 @@ function LastestCollection() {
 
   return (
     <Container maxWidth='xl' sx={{ py: 4 }}>
-      <Typography variant='h3' textAlign={'center'}>
+      <Typography variant='h3' textAlign={'center'} sx = {{pb: 4}}>
         Latest Collection
       </Typography>
       <Grid container>
@@ -35,12 +35,12 @@ function LastestCollection() {
                   <CardMedia style = {{objectFit: "contain"}}
                       component="img"
                       image={val.image}
-                      sx = {{py: 1, width: 240, height: 240, mx: "auto"}}
+                      sx = {{py: 1, width: "177px", height: "198px", mx: "auto"}}
                       alt={val.title}
                     />
                 </CardActionArea>
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography sx = {{fontSize: "18px"}} gutterBottom variant="h5" component="div">
                       {val.title}
                     </Typography>
                     <Typography>{val.price} USD</Typography>

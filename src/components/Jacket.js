@@ -49,7 +49,7 @@ export default function JacketsContent() {
                     />
                 </CardActionArea>
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography sx = {{fontSize: "18px"}} gutterBottom variant="h5" component="div">
                       {val.title}
                     </Typography>
                     <Typography>{val.price} USD</Typography>
