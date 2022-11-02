@@ -44,7 +44,7 @@ export default function Dashboard({currentUser}) {
             <Typography gutterBottom variant="h5" component="div">
               Current User
             </Typography>
-            <Typography>{currentLogedUser && currentUser}</Typography>
+            <Typography>{currentUser && currentUser.email}</Typography>
           </CardContent>
         </CardActionArea>
         <CardActions sx={{ display: "flex", justifyContent: "center" }}>
