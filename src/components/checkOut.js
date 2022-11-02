@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { auth } from "../firebase";
 
 // importing mui components
 import {
@@ -30,6 +31,10 @@ export default function SignUp() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const signUp = (email, password)=> {
+    return auth.createUserWithEmailAndPassword(email, password)
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     const characters = email.slice(-4)
@@ -46,7 +51,7 @@ export default function SignUp() {
     try {
       setError("");
       setLoading(true);
-      await dispatch(userSignInHandler(email, password));
+      await signUp(email, password);
       setEmail("");
       navigate("/SignIn");
     } catch {

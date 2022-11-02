@@ -90,7 +90,7 @@ function App() {
           <Route path="/description" element={<DescriptionPage />}></Route>
           <Route path="/SignIn" element={<SignIn/>}></Route>
           <Route path="/SignUp" element={<SignUp />}></Route>
-          <Route path="/Dashboard" element={<Dashboard />}></Route>
+          <Route path="/Dashboard" element={<Dashboard currentUser = {currentUser} />}></Route>
           <Route path="/ChangePassword" element={<ChangePassword />}></Route>
         </Routes>
       </div>

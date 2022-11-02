@@ -10,7 +10,7 @@ import { Button, CardActionArea, CardActions, Container,Alert } from "@mui/mater
 // importing React Router Components
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Dashboard() {
+export default function Dashboard({currentUser}) {
   const [error, setError] = useState("");
   const currentLogedUser = useSelector((state) => state.currentUser);
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ export default function Dashboard() {
             <Typography gutterBottom variant="h5" component="div">
               Current User
             </Typography>
-            <Typography>{currentLogedUser && currentLogedUser[0] || "error"}</Typography>
+            <Typography>{currentLogedUser && currentUser}</Typography>
           </CardContent>
         </CardActionArea>
         <CardActions sx={{ display: "flex", justifyContent: "center" }}>
