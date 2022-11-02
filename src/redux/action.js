@@ -1,4 +1,4 @@
-import {GETDATA, ADDCARTITEMS,COUNTADD , REMOVEITEM, PRODUCTDETAILS, ADDUSERSIGNIN, userLogin} from "../redux/type.js"
+import {GETDATA, ADDCARTITEMS,COUNTADD , REMOVEITEM, PRODUCTDETAILS, ADDUSERSIGNIN, userLogin,REMOVEITEMCOUNT} from "../redux/type.js"
 
 
 export const apiFetcherDispatch = (data) => {
@@ -47,5 +47,11 @@ export const countAdd = (id) => {
     return {
         type: COUNTADD,
         payload:id
+    }
+}
+export const decreaseItemCount = (obj) => {
+    return {
+        type: REMOVEITEMCOUNT,
+        payload: obj
     }
 }

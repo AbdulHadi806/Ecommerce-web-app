@@ -1,4 +1,4 @@
-import { GETDATA, ADDCARTITEMS,  REMOVEITEM, PRODUCTDETAILS, ADDUSERSIGNIN,userLogin } from "../redux/type.js"
+import { GETDATA, ADDCARTITEMS,  REMOVEITEM, PRODUCTDETAILS, ADDUSERSIGNIN,userLogin, REMOVEITEMCOUNT } from "../redux/type.js"
 
 const initialState = {
   ShopItems: [],
@@ -35,38 +35,24 @@ export default function Reducer(state = initialState, action) {
           CartItems: [...state.CartItems, {...action.payload, count: 1}]
         }
       }
-      
-      // remove item code here
-      // return {
-      //   ...state,
-      //   CartItems: state.CartItems.map(item => {
-      //     if(item.count > 1){
-      //       return {...item, count:item.count - 1}
-      //     }
-      //     else {
-      //       return {
-      //         ...state, 
-      //         CartItems: state.CartItems.filter((obj) => obj.id !== action.payload),
-      //       }
-      //     }
-      //   })
-      // }
-
-
     case REMOVEITEM:
-      const item = state.CartItems.find((obj) => obj.id === action.payload.id)
+      return {
+        ...state, CartItems: state.CartItems.filter((item) => item.id !== action.payload.id)
+      }
+    case REMOVEITEMCOUNT:
+      const removeItem = state.CartItems.find((obj) => obj.id === action.payload.id)
+      if(removeItem){
         return {
           ...state,
           CartItems: state.CartItems.map(item => {
-          if(item.id === action.payload.id){
-            if(item.count > 1){
+          if(item.id === action.payload.id && item.count > 1){
               return {...item, count: item.count - 1}
-            }
           } else {
-            return item
+            return  item
           }
           })
-      }      
+      }
+     }
   // case ADDUSERSIGNIN:      
   //   return {                                                      // [0 = emai, 1 = password]
   //     ...state, currentUser: auth.createUserWithEmailAndPassword(action.payload[0], action.payload[1])

@@ -24,7 +24,7 @@ import {
 } from "@mui/material";
 
 // importing actions here
-import { removeItem,filterList } from "../redux/action";
+import { removeItem,filterList, decreaseItemCount } from "../redux/action";
 
 export default function Cart() {
   const CartItems = useSelector((state) => state.CartItems);
@@ -37,6 +37,9 @@ export default function Cart() {
   const cartListHandler = (obj) => {
     dispatch(filterList(obj));
 };
+const decreaseItemCountHandler = (obj) => {
+  dispatch(decreaseItemCount(obj))
+}
   const shippingTaxes = CartItems.reduce(
     (aucc, curr) => aucc - curr.price + 33 * curr.count,
     0
@@ -139,6 +142,7 @@ export default function Cart() {
                           size="small"
                         />
                         <Button onClick={()=>{cartListHandler(data)}}><AddIcon sx ={{color: "#000"}} /></Button>
+                        <Button onClick={()=>{decreaseItemCountHandler(data)}}>Decrease</Button>
                       </Box>
                     </CardContent>
                   </Box>
