@@ -256,7 +256,7 @@ const Header = ({currentUser}) => {
             <ShoppingCartIcon sx={{ color: "#fff" }} fontSize="large" />
             <Typography
               variant="h5"
-              sx={{ position: "absolute", right: -10, top: 7, color: "#fff" }}
+              sx={{ position: "absolute", right: -3, top: 8, color: "#fff" }}
             >
               {TotalCount}
             </Typography>
