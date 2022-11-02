@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { auth } from "../firebase";
 
 // importing mui components
 import Card from "@mui/material/Card";
@@ -13,11 +13,14 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Dashboard({currentUser}) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const logOut = () => {
+    return auth.signOut();
+  };
   async function handleLogOut(e) {
     e.preventDefault()
     setError("");
     try {
-      // await logOut();
+      await logOut();
       navigate("/Login");
     } catch {
       setError("Failed to Log out");

@@ -24,7 +24,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
-const Header = () => {
+const Header = ({currentUser}) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -32,7 +32,7 @@ const Header = () => {
     setOpen(true);
   };
 
-  const handleDrawerClose = () => {
+  const handleDrawerClose = ({}) => {
     setOpen(false);
   };
   const CartItems = useSelector((state) => state.CartItems);
@@ -245,10 +245,10 @@ const Header = () => {
           }}
         >
           <Link
-            to="/checkoutPage"
+            to={currentUser ? "/Dashboard": "/checkoutPage"}
             style={{ textDecoration: "none", color: "#000" }}
           >
-            <Typography variant="h7">Sign Up</Typography>
+            <Typography variant="h7">{currentUser ? "Go to dashboard": "Sign Up"}</Typography>
           </Link>
         </Button>
         <Button sx={{ p: "0" }}>

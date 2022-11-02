@@ -21,7 +21,7 @@ export default function Reducer(state = initialState, action) {
         return {
           ...state,
           CartItems: state.CartItems.map(item => {
-          if(item.id === action.payload.id){
+          if(item.id === action.payload.id && item.count < 5 ){
             return {...item, count: item.count + 1}
           } else {
             return item
@@ -53,14 +53,6 @@ export default function Reducer(state = initialState, action) {
           })
       }
      }
-  // case ADDUSERSIGNIN:      
-  //   return {                                                      // [0 = emai, 1 = password]
-  //     ...state, currentUser: auth.createUserWithEmailAndPassword(action.payload[0], action.payload[1])
-  //   }
-  // case userLogin:
-  //   return {
-  //     ...state, currentUser: auth.signInWithEmailAndPassword(action.payload[0], action.payload[1])
-  //   }
     case PRODUCTDETAILS:
   return {
     ...state,

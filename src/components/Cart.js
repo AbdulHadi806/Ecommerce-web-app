@@ -1,10 +1,11 @@
-import React, {  useState } from "react";
+import React from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
 
 // importing MUI Icons
 import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 // importing react router dom Link
 import { Link } from "react-router-dom";
@@ -19,6 +20,7 @@ import {
   Button,
   Card,
   CardContent,
+  Alert,
   CardMedia,
   Box,
 } from "@mui/material";
@@ -28,17 +30,12 @@ import { removeItem,filterList, decreaseItemCount } from "../redux/action";
 
 export default function Cart() {
   const CartItems = useSelector((state) => state.CartItems);
-  const increaseDecreaseCount = (count) => {
-     let Count = count
-     let finalCount = Count -1
-     console.log(Count)
-     return finalCount
-  }
   const cartListHandler = (obj) => {
     dispatch(filterList(obj));
 };
 const decreaseItemCountHandler = (obj) => {
-  dispatch(decreaseItemCount(obj))
+    dispatch(decreaseItemCount(obj))
+  
 }
   const shippingTaxes = CartItems.reduce(
     (aucc, curr) => aucc - curr.price + 33 * curr.count,
@@ -141,8 +138,10 @@ const decreaseItemCountHandler = (obj) => {
                           variant="filled"
                           size="small"
                         />
-                        <Button onClick={()=>{cartListHandler(data)}}><AddIcon sx ={{color: "#000"}} /></Button>
-                        <Button onClick={()=>{decreaseItemCountHandler(data)}}>Decrease</Button>
+                        <Box sx = {{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                        <Button onClick={()=>{cartListHandler(data)}} sx = {{height: "20px", color: "Transparent"}}><AddIcon sx ={{color: "#000"}} /></Button>
+                        <Button onClick={()=>{decreaseItemCountHandler(data)}} sx = {{height: "20px", color: "Transparent"}}><RemoveIcon sx ={{color: "#000"}} onClick={()=>{decreaseItemCountHandler(data)}}/></Button>
+                        </Box>
                       </Box>
                     </CardContent>
                   </Box>

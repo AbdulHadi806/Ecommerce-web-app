@@ -50,7 +50,7 @@ export const theme = createTheme({
 
 function App() {
   const [ currentUser, setCurrentUser] = useState()
-
+  console.log("current User is", currentUser)
   const dispatch = useDispatch();
   // fetching api data here
   const api = "https://fakestoreapi.com/products";
@@ -78,7 +78,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header  currentUser = {currentUser} />
         <Routes>
           {" "}
           <Route path="/" element={<Mainpage />}></Route>

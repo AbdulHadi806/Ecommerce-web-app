@@ -10,8 +10,4 @@ export const REMOVEITEM = "REMOVEITEM"
 
 export const PRODUCTDETAILS = "PRODUCTDETAILS"
 
-export const ADDUSERSIGNIN = "ADDUSERSIGNIN"
-
-export const userLogin = "userLogin"
-
 export const REMOVEITEMCOUNT = "REMOVEITEMCOUNT"
