@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { auth } from "./firebase";
 
 // importing MUI components
 import { createTheme } from "@mui/material";
@@ -48,6 +49,8 @@ export const theme = createTheme({
 });
 
 function App() {
+  const [ currentUser, setCurrentUser] = useState()
+
   const dispatch = useDispatch();
   // fetching api data here
   const api = "https://fakestoreapi.com/products";
@@ -63,6 +66,13 @@ function App() {
       }
     };
     fetchApiData(api);
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+    });
+    return unsubscribe;
   }, []);
 
   return (
