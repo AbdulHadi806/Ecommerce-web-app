@@ -31,14 +31,12 @@ export const descriptionHandler = (id) => {
 }
 
 export const userSignInHandler = (...data) => {
-    console.log(data)
     return {
         type: ADDUSERSIGNIN,
         payload: data
     }
 }
 export const userLoginHandler = (...data) => {
-    console.log(data)
     return {
         type: userLogin,
         payload:data
