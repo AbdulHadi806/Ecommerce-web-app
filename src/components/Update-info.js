@@ -15,41 +15,30 @@ import {
 
 import { Link, useNavigate } from "react-router-dom";
 
-export default function SignUp() {
+export default function UpdateInfo({currentUser}) {
   const [email, setEmail] = useState("");
-  const [password, setpassword] = useState("");
-  const [passwordConfirm, setpasswordConfirm] = useState("");
   const [error, setError] = useState("");
   const [Loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const signUp = (email, password)=> {
-    return auth.createUserWithEmailAndPassword(email, password)
-  }
-
-  async function handleSubmit(e) {
+  const updateEmail = (email) => {
+    return currentUser.updateEmail(email);
+  };
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const characters = email.slice(-4)
-    if(characters !== ".com"){
-      return setError("Incorrect Email Format")
+    setLoading(true)
+    const promises = []
+    if (email !== currentUser.email) {
+        promises.push(updateEmail(email))
     }
+    Promise.all(promises).then(()=> {
+        navigate("/")
+    }).catch(()=> {
+        setError("Failed to update information")
+        navigate("/")
+    }).finally(()=> {
+        setLoading(false)
+    })
 
-    if (passwordConfirm.length < 6) {
-      return setError("Password must be 6 characters longer");
-    }
-    if (password !== passwordConfirm) {
-      return setError("Passwords not matched");
-    }
-    try {
-      setError("");
-      setLoading(true);
-      await signUp(email, password);
-      setEmail("");
-      navigate("/Dashboard");
-    } catch {
-      setError("Fail to login");
-    }
-    setLoading(false);
   }
 
   return (
@@ -70,9 +59,8 @@ export default function SignUp() {
             >
               <CardContent>
                 {error && <Alert severity="error">{error}</Alert>}
-
                 <Typography gutterBottom variant="h5">
-                  Sign Up
+                  Update info
                 </Typography>
                 <Typography
                   variant="body2"
@@ -80,7 +68,7 @@ export default function SignUp() {
                   component="p"
                   gutterBottom
                 >
-                  Please Sign in to Verify Your Self
+                  Please enter new email to reset
                 </Typography>
                 <form onSubmit={handleSubmit}>
                   <Grid container spacing={1}>
@@ -88,36 +76,12 @@ export default function SignUp() {
                       <TextField
                         type="email"
                         name="email"
+                        label="Enter Email"
+
                         onChange={(e) => {
                           setEmail(e.target.value);
                         }}
-                        placeholder="Enter email"
-                        variant="outlined"
-                        fullWidth
-                        required
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        multiline
-                        placeholder="Type Password"
-                        type="password"
-                        onChange={(e) => {
-                          setpassword(e.target.value);
-                        }}
-                        variant="outlined"
-                        fullWidth
-                        required
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        multiline
-                        placeholder="Confirm Password"
-                        type="password"
-                        onChange={(e) => {
-                          setpasswordConfirm(e.target.value);
-                        }}
+                        placeholder="example@example.com"
                         variant="outlined"
                         fullWidth
                         required
@@ -127,21 +91,15 @@ export default function SignUp() {
                       <Button
                         type="submit"
                         variant="contained"
-                        onChange={(e) => {
-                          setpassword(e.target.value);
-                        }}
                         disabled={Loading}
                         color="primary"
                         fullWidth
                       >
-                        Sign Up
+                        Update
                       </Button>
                     </Grid>
                   </Grid>
                 </form>
-                <Typography sx={{ mt: 3, textAlign: "center" }}>
-                  Already have an account? <Link to="/SignIn">Sign In</Link>
-                </Typography>
               </CardContent>
             </Card>
           </Grid>

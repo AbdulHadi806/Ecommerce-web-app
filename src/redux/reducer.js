@@ -15,7 +15,6 @@ export default function Reducer(state = initialState, action) {
         ShopItems: action.payload,
       };      
     case ADDCARTITEMS:
-      // adding items to cart and removing duplicates while counting them
       const isItem = state.CartItems.find(ci => ci.id === action.payload.id)
       if(isItem){
         return {
@@ -40,19 +39,16 @@ export default function Reducer(state = initialState, action) {
         ...state, CartItems: state.CartItems.filter((item) => item.id !== action.payload.id)
       }
     case REMOVEITEMCOUNT:
-      const removeItem = state.CartItems.find((obj) => obj.id === action.payload.id)
-      if(removeItem){
         return {
           ...state,
           CartItems: state.CartItems.map(item => {
           if(item.id === action.payload.id && item.count > 1){
               return {...item, count: item.count - 1}
           } else {
-            return  item
-          }
+            return item
+           }
           })
       }
-     }
     case PRODUCTDETAILS:
   return {
     ...state,

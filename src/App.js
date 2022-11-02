@@ -26,7 +26,7 @@ import SignIn from "./components/Login"
 import SignUp from "./components/checkOut"
 import Dashboard from "./components/dashboard"
 import ChangePassword from "./components/ResetPassword"
-
+import UpdateInfo from "./components/Update-info"
 
 // custom Theme
 export const theme = createTheme({
@@ -50,7 +50,6 @@ export const theme = createTheme({
 
 function App() {
   const [ currentUser, setCurrentUser] = useState()
-  console.log("current User is", currentUser)
   const dispatch = useDispatch();
   // fetching api data here
   const api = "https://fakestoreapi.com/products";
@@ -82,7 +81,7 @@ function App() {
         <Routes>
           {" "}
           <Route path="/" element={<Mainpage />}></Route>
-          <Route path="/Cart" element={<Cartpage />}></Route>
+          <Route path="/Cart" element={<Cartpage  currentUser = {currentUser}/>}></Route>
           <Route path="/Jackets" element={<Jackets />}></Route>
           <Route path="/Electronics" element={<ElectronicPage />}></Route>
           <Route path="/WomanClothsPage" element={<WomanClothsPage />}></Route>
@@ -92,6 +91,7 @@ function App() {
           <Route path="/SignUp" element={<SignUp />}></Route>
           <Route path="/Dashboard" element={<Dashboard currentUser = {currentUser} />}></Route>
           <Route path="/ChangePassword" element={<ChangePassword />}></Route>
+          <Route path="/UpdateInfo" element={<UpdateInfo currentUser = {currentUser}/>}></Route>
         </Routes>
       </div>
       <Footer />

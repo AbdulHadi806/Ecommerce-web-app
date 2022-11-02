@@ -3,10 +3,10 @@ import React from 'react'
 // importing components
 import Cart from '../components/Cart'
 
-export default function Cartpage() {
+export default function Cartpage({currentUser}) {
   return (
     <>
-    <Cart />
+    <Cart currentUser={currentUser}/>
     </>
   )
 }

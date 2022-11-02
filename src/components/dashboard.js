@@ -21,7 +21,7 @@ export default function Dashboard({currentUser}) {
     setError("");
     try {
       await logOut();
-      navigate("/Login");
+      navigate("/SignIn");
     } catch {
       setError("Failed to Log out");
     }
@@ -67,7 +67,7 @@ export default function Dashboard({currentUser}) {
           </Link>
         </CardActions>
       </Card>
-      <Button onClick={handleLogOut} sx={{ fontSize: "20px" }}>
+     <Button onClick={handleLogOut} sx={{ fontSize: "20px" }}>
         Log Out
       </Button>
     </Container>

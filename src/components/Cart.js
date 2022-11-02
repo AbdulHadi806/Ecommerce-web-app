@@ -28,7 +28,7 @@ import {
 // importing actions here
 import { removeItem,filterList, decreaseItemCount } from "../redux/action";
 
-export default function Cart() {
+export default function Cart({currentUser}) {
   const CartItems = useSelector((state) => state.CartItems);
   const cartListHandler = (obj) => {
     dispatch(filterList(obj));
@@ -147,7 +147,7 @@ const decreaseItemCountHandler = (obj) => {
                   </Box>
                   <CardActions sx={{ justifyContent: "flex-end" }}>
                     <Link
-                      to="/checkoutPage"
+                      to={currentUser ? "/Dashboard": "/SignIn"}
                       style={{ color: "#000", textDecoration: "none" }}
                     >
                       <Button sx = {{width: "200px", bgcolor: "#000", color: "#fff", height: "46px", ':hover': {
