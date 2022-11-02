@@ -1,5 +1,4 @@
 import { GETDATA, ADDCARTITEMS,  REMOVEITEM, PRODUCTDETAILS, ADDUSERSIGNIN,userLogin } from "../redux/type.js"
-import { auth } from "../firebase";
 
 const initialState = {
   ShopItems: [],
@@ -59,14 +58,7 @@ export default function Reducer(state = initialState, action) {
     ...state, 
     CartItems: state.CartItems.filter((obj) => obj.id !== action.payload),
   })          
-  // case ADDUSERSIGNIN:      
-  //   return {                                                      // [0 = emai, 1 = password]
-  //     ...state, currentUser: auth.createUserWithEmailAndPassword(action.payload[0], action.payload[1])
-  //   }
-  // case userLogin:
-  //   return {
-  //     ...state, currentUser: auth.signInWithEmailAndPassword(action.payload[0], action.payload[1])
-  //   }
+  
     case PRODUCTDETAILS:
   return {
     ...state,

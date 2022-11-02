@@ -12,7 +12,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Dashboard({currentUser}) {
   const [error, setError] = useState("");
-  const currentLogedUser = useSelector((state) => state.currentUser);
   const navigate = useNavigate();
   async function handleLogOut(e) {
     e.preventDefault()
