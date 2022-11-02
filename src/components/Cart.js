@@ -19,7 +19,6 @@ import {
   Button,
   Card,
   CardContent,
-  Alert,
   CardMedia,
   Box,
 } from "@mui/material";
@@ -36,12 +35,11 @@ export default function Cart({ currentUser }) {
     dispatch(decreaseItemCount(obj));
   };
   const shippingTaxes = CartItems.reduce(
-    (aucc, curr) => aucc - curr.price + 33 * curr.count,
+    (aucc, curr) => aucc + curr.price * curr.count,
     0
   );
   const shippingTaxesTotal = Math.abs(shippingTaxes);
   const shippingTaxesTotalVal = shippingTaxesTotal.toFixed(2);
-
   const totalPriceCounter = CartItems.reduce(
     (aucc, curr) => aucc + curr.price * curr.count,
     shippingTaxesTotal

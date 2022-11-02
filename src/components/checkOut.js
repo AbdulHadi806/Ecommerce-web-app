@@ -80,7 +80,7 @@ export default function SignUp() {
                   component="p"
                   gutterBottom
                 >
-                  Please Sign in to Verify Your Self
+                  Please Sign Up to be a part of our store 
                 </Typography>
                 <form onSubmit={handleSubmit}>
                   <Grid container spacing={1}>

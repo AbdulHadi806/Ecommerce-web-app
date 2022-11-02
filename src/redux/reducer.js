@@ -4,7 +4,6 @@ const initialState = {
   ShopItems: [],
   CartItems: [],
   ProductDetails: [],
-  currentUser: null,
 };
 
 export default function Reducer(state = initialState, action) {
