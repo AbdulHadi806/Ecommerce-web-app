@@ -37,28 +37,44 @@ export default function Reducer(state = initialState, action) {
       }
       
       // remove item code here
-      /*return {
-        ...state,
-        CartItems: state.CartItems.map(item => {
-          if(item.count > 1){
-            return {...item, count:item.count - 1}
-          }
-          else {
-            return {
-              ...state, 
-              CartItems: state.CartItems.filter((obj) => obj.id !== action.payload),
-            }
-          }
-        })
-      }*/
+      // return {
+      //   ...state,
+      //   CartItems: state.CartItems.map(item => {
+      //     if(item.count > 1){
+      //       return {...item, count:item.count - 1}
+      //     }
+      //     else {
+      //       return {
+      //         ...state, 
+      //         CartItems: state.CartItems.filter((obj) => obj.id !== action.payload),
+      //       }
+      //     }
+      //   })
+      // }
 
 
     case REMOVEITEM:
-  return ({   // if count is greate than 1 remove count else remove item
-    ...state, 
-    CartItems: state.CartItems.filter((obj) => obj.id !== action.payload),
-  })          
-
+      const item = state.CartItems.find((obj) => obj.id === action.payload.id)
+        return {
+          ...state,
+          CartItems: state.CartItems.map(item => {
+          if(item.id === action.payload.id){
+            if(item.count > 1){
+              return {...item, count: item.count - 1}
+            }
+          } else {
+            return item
+          }
+          })
+      }      
+  // case ADDUSERSIGNIN:      
+  //   return {                                                      // [0 = emai, 1 = password]
+  //     ...state, currentUser: auth.createUserWithEmailAndPassword(action.payload[0], action.payload[1])
+  //   }
+  // case userLogin:
+  //   return {
+  //     ...state, currentUser: auth.signInWithEmailAndPassword(action.payload[0], action.payload[1])
+  //   }
     case PRODUCTDETAILS:
   return {
     ...state,

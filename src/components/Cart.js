@@ -52,8 +52,8 @@ export default function Cart() {
   const totalPrice = totalPriceCounter.toFixed(2);
 
   const dispatch = useDispatch();
-  const itemDeleteHandler = (id) => {
-    dispatch(removeItem(id));
+  const itemDeleteHandler = (obj) => {
+    dispatch(removeItem(obj));
   };
   return (
     <Container
@@ -154,7 +154,7 @@ export default function Cart() {
                     <Button
                       onClick={(e) => {
                         e.preventDefault();
-                        itemDeleteHandler(data.id);
+                        itemDeleteHandler(data);
                       }}
                       size="medium"
                       sx = {{width: "200px", ml: 1, bgcolor: "#000", color: "#fff", height: "46px", ':hover': {
