@@ -52,7 +52,7 @@ export default function Cart({ currentUser }) {
     dispatch(removeItem(obj));
   };
   return (
-    <Container
+    <Container                                  
       maxWidth="xl"
       sx={{
         py: 20,

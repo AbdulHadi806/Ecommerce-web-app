@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Dashboard({currentUser}) {
   const [error, setError] = useState("");
+  const [balance, setBalance] = useState(0)
   const navigate = useNavigate();
   const logOut = () => {
     return auth.signOut();
@@ -26,7 +27,6 @@ export default function Dashboard({currentUser}) {
       setError("Failed to Log out");
     }
   }
-
   return (
     <Container
       sx={{

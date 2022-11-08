@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { auth } from "../firebase";
 
 // importing mui components
 import {
@@ -13,7 +12,7 @@ import {
   TextField,
 } from "@mui/material";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function UpdateInfo({currentUser}) {
   const [email, setEmail] = useState("");
@@ -31,10 +30,10 @@ export default function UpdateInfo({currentUser}) {
         promises.push(updateEmail(email))
     }
     Promise.all(promises).then(()=> {
-        navigate("/")
+        navigate("/Dashboard")
     }).catch(()=> {
         setError("Failed to update information")
-        navigate("/")
+        navigate("/Dashboard")
     }).finally(()=> {
         setLoading(false)
     })
