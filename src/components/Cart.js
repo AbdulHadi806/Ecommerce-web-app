@@ -134,7 +134,7 @@ export default function Cart({ currentUser }) {
                           value={data.count}
                           variant="filled"
                           size="small"
-                        />
+                        />  
                         <Box
                           sx={{
                             display: "flex",

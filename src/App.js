@@ -50,6 +50,7 @@ export const theme = createTheme({
 
 function App() {
   const [ currentUser, setCurrentUser] = useState()
+  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch();
   // fetching api data here
   const api = "https://fakestoreapi.com/products";
@@ -60,6 +61,9 @@ function App() {
         const response = await fetch(api);
         const data = await response.json();
         dispatch(apiFetcherDispatch(data));
+        setTimeout(()=> {
+          setLoading(false)
+        }, 2000)
       } catch (error) {
         console.log(error + "This is an error");
       }
@@ -80,8 +84,8 @@ function App() {
         <Header  currentUser = {currentUser} />
         <Routes>
           {" "}
-          <Route path="/" element={<Mainpage />}></Route>
-          <Route path="/Cart" element={<Cartpage  currentUser = {currentUser}/>}></Route>
+          <Route path="/" element={ <Mainpage loading = {loading}/>}></Route>
+          <Route path="/Cart" element={<Cartpage currentUser = {currentUser}/>}></Route>
           <Route path="/Jackets" element={<Jackets />}></Route>
           <Route path="/Electronics" element={<ElectronicPage />}></Route>
           <Route path="/WomanClothsPage" element={<WomanClothsPage />}></Route>
