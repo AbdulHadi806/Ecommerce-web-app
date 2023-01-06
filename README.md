@@ -1,4 +1,6 @@
-Ecommernce site. I used Material ui, React.js, redux.
+#Ecommernce site
+
+I used Material ui, React.js, redux.
 The site also has authentication done by firebase.
 Moreover Routing is done through React-router-dom.
 
