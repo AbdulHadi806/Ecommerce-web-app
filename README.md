@@ -1,4 +1,4 @@
-#Ecommernce site
+# Ecommernce site
 
 I used Material ui, React.js, redux.
 The site also has authentication done by firebase.
